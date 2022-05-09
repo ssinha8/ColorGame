@@ -4,4 +4,21 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this);
     }
+
+
+    update(){
+        this.body.setVelocityX(0)
+        if(keyLEFT.isDown){
+            if(!(keyRIGHT.isDown)){
+                this.body.setVelocityX(-800);
+            }
+        }else if(keyRIGHT.isDown){
+            this.body.setVelocityX(800);
+        }
+    }
+
+
+    reset(){
+
+    }
 }
