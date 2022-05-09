@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
 
   // Does nothing right now
   create() {
+    this.player = new plChr(this, 300, 300, 'placeholder', 0);
   }
 
   
