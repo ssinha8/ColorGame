@@ -23,10 +23,6 @@ class Menu extends Phaser.Scene {
     }
 
     const play = this.add.text((game.config.width/2)-80, 230, "Play (P)", menuStyle);
-    this.add.text((game.config.width/2)-210, 270, "Hold ↑ for higher jumps", menuStyle);
-    this.add.text((game.config.width/2)-290, 310, "Hold ↓ to fall through platforms", menuStyle);
-    this.add.text((game.config.width/2)-350, 350, "Dodge UFOs and avoid falling in craters", menuStyle);
-        
     play.setInteractive();
     play.on('pointerdown', () => {this.scene.start('playScene')});
    }
