@@ -12,5 +12,5 @@ let config = {
     scene: [Menu, Play] // Shop scene has been scrapped due to lack of time.
 }
 
-let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE;
+let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE, keySPACE;
 let game = new Phaser.Game(config);

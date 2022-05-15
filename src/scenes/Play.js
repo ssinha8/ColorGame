@@ -6,6 +6,9 @@ class Play extends Phaser.Scene {
   // Eventually load sprites and spritesheets (animation)
   preload() {
     this.load.image('placeholder', './assets/placeholder.png');
+    this.load.image('gravity', './assets/gravity.png');
+    this.load.image('wallPowerup', './assets/wallPowerup.png');
+    this.load.image('wall', './assets/wall.png');
 
   }
 
@@ -19,6 +22,7 @@ class Play extends Phaser.Scene {
     keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
 
@@ -27,22 +31,57 @@ class Play extends Phaser.Scene {
     this.player = new plChr(this, 300, 300, 'placeholder', 0);
     this.player.body.setAllowGravity(false);
     this.wallGroup = this.add.group();
+    this.floorGroup = this.add.group();
+
+    // Floor at bottom
+    for (let i = 0; i < game.config.width; i+= 30) {
+      let groundTile = this.physics.add.sprite(i, game.config.height - 30, 'placeholder').setOrigin(0);
+      groundTile.body.setAllowGravity(false);
+      groundTile.body.immovable = true;
+      this.floorGroup.add(groundTile);
+    }
 
     // Powerup objects
-    this.powerupGravity = new Powerup(this, 500, 300, 'placeholder', 0); // Powerup for gravity
+    this.powerupGravity = new Powerup(this, 500, 300, 'gravity', 0); // Powerup for gravity
     this.powerupGravity.body.setAllowGravity(false);
-    this.powerupWall = new Powerup(this, 700, 300, 'placeholder', 0); // Powerup for walls
+    this.powerupWall = new Powerup(this, 700, 300, 'wallPowerup', 0); // Powerup for walls
     this.powerupWall.body.setAllowGravity(false);
 
     // Add each wall into the group (for now I just have one):
-    this.wall = new Wall(this, 400, 300, 'placeholder', 0);
+    this.wall = new Wall(this, 400, 300, 'wall', 0);
+   // console.log(this.wall.body.checkCollision);
     this.wall.body.immovable = true;
     this.wallGroup.add(this.wall);
+
+    // Walls on floor to test wall jumping
+    for (let i = 490; i > 380; i -= 30) {
+      let wall = new Wall(this, 460, i, 'wall');
+      let wall2 = new Wall(this, 600, i, 'wall');
+      
+      wall.body.immovable = true;
+      wall2.body.immovable = true;
+
+      if (i == 400) {
+        wall.body.checkCollision.up = true;
+      
+      } else {
+        wall.body.checkCollision.up = false;
+        wall.body.checkCollision.down = false;
+        wall2.body.checkCollision.up = false;
+        wall2.body.checkCollision.down = false;
+      }
+
+      wall.body.setAllowGravity(false);
+      wall2.body.setAllowGravity(false);
+      this.wallGroup.add(wall);
+      this.wallGroup.add(wall2);
+    }
 
     // For testing purposes
     this.wall.body.setAllowGravity(false);
 
     // Physics collider
+    this.physics.add.collider(this.player, this.floorGroup);
     this.wallCollider = this.physics.add.collider(this.player, this.wallGroup);
     this.wallCollider.active = this.wall.canWallCollide;
 
@@ -62,16 +101,13 @@ class Play extends Phaser.Scene {
   setCollision(type, collider) {
     if (Phaser.Input.Keyboard.JustDown(this.keyENTER)) {
 
-      switch (type) {
-        case 'gravity':
+        if (type == 'gravity') {
           this.playerGravity = true;
           this.player.body.setAllowGravity(this.playerGravity);
-          break;
-      
-        default:
+
+        } else {
           collider.active = !collider.active;
-          break;
-      }
+        }
     }
   }
 
