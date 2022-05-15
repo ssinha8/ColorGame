@@ -3,12 +3,12 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.jumpedRightSide = false;
-        this.jumpedLeftSide = false;
+    //    this.jumpedRightSide = false;
+    //    this.jumpedLeftSide = false;
 
-        this.JUMP_FORCE = 130;
+        this.JUMP_FORCE = 100;
         this.JUMP_X = 100;
-        this.ACCELERATION = 1500;
+        this.ACCELERATION = 4500;
         this.MAX_X_VEL = 1400;
         this.MAX_Y_VEL = 500;
     }
@@ -24,6 +24,11 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                 
                 } else {
                     this.body.setVelocityX(-this.JUMP_X);
+                 //   console.log(this.body.acceleration.x);
+
+                    if (this.body.acceleration.x > 0) {
+                        this.setAccelerationX(0);
+                    }
                 }
             }
 
@@ -33,6 +38,10 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
 
             } else {
                 this.body.setVelocityX(this.JUMP_X);
+
+                if (this.body.acceleration.x < 0) {
+                    this.setAccelerationX(0);
+                }
             }
         }
 
@@ -40,19 +49,21 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
             if (this.body.touching.down && this.body.onFloor()) {
                 this.setVelocityY(-150);
 
-            } else if (this.body.touching.right && this.jumpedRightSide == false) {
+            } else if (this.body.touching.right) {
                 this.setAccelerationX(-this.ACCELERATION);
                 this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
                 this.setVelocityY(-this.JUMP_FORCE);
-                this.jumpedRightSide = true;
-                this.jumpedLeftSide = false;
+            //    this.setVelocityX(-200);
+           //     this.jumpedRightSide = true;
+            //    this.jumpedLeftSide = false;
 
-            } else if (this.body.touching.left && this.jumpedLeftSide == false) {
+            } else if (this.body.touching.left) {
                 this.setAccelerationX(this.ACCELERATION);
                 this.setVelocityY(-this.JUMP_FORCE);
                 this.setVelocityY(-this.JUMP_FORCE);
-                this.jumpedRightSide = false;
-                this.jumpedLeftSide = true;
+            //    this.setVelocityX(200);
+            //    this.jumpedRightSide = false;
+            //    this.jumpedLeftSide = true;
             }
         
         }
