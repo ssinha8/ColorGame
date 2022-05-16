@@ -24,6 +24,7 @@ class Play extends Phaser.Scene {
     keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+    this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
 
     //Add gameplay objects
@@ -94,6 +95,11 @@ class Play extends Phaser.Scene {
 
   
   update() {
+
+    if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
+      this.scene.start('pauseScene');
+    }
+
     this.player.update();
   }
 

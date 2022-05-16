@@ -9,7 +9,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Menu, Play] // Shop scene has been scrapped due to lack of time.
+    scene: [Menu, Pause, Play]
 }
 
 let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE, keySPACE;
