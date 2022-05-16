@@ -6,18 +6,25 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.momentumEnable = false;
         this.gravityEnable = false;
         this.wallsEnable = false;
-        this.JUMP_FORCE = 100;
-        this.JUMP_X = 100;
+        this.JUMP_FORCE = 800;
         this.ACCELERATION = 4500;
         this.MAX_X_VEL = 1400;
-        this.MAX_Y_VEL = 500;
+        this.leftLock = 0;
+        this.rightLock = 0;
     }
 
 
     update(){
-        this.body.setVelocityX(0);
-
-        if(keyLEFT.isDown){
+        if(this.leftLock == 0 && this.rightLock == 0){
+            this.body.setVelocityX(0);
+        }
+        if (this.leftLock > 0){
+            this.leftLock -= 1;
+        }
+        if (this.rightLock > 0){
+            this.rightLock -= 1;
+        }
+        if(keyLEFT.isDown && this.leftLock == 0){
             if(!keyRIGHT.isDown){
                 if (!this.momentumEnable){
                     this.body.setVelocityX(-800);
@@ -32,7 +39,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                 }
             }
 
-        }else if(keyRIGHT.isDown){
+        }else if(keyRIGHT.isDown && this.rightLock == 0){
             if (!this.momentumEnable) {
                 this.body.setVelocityX(800);
 
@@ -44,33 +51,44 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
             }
         }
 
+        if (this.gravityEnable){
+            this.setAccelerationY(800)
+        }
+        else{
+            this.setAccelerationY(0);
+            this.setVelocityY(0);
+        }
+
+
+        if (this.body.touching.down) {
+            this.setVelocityY(0);
+        }
+
         if (keyJUMP.isDown) {
             if (this.body.touching.down && this.body.onFloor()) {
-                this.setVelocityY(-800);
+                this.setVelocityY(-this.JUMP_FORCE);
 
             } else if (this.body.touching.right) {
-                this.setAccelerationX(-this.ACCELERATION);
-                this.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
+                this.setVelocityX (-800);
                 this.setVelocityY(-this.JUMP_FORCE);
+                if(!this.momentumEnable){
+                    this.rightLock = 15;
+                }
             //    this.setVelocityX(-200);
            //     this.jumpedRightSide = true;
             //    this.jumpedLeftSide = false;
 
             } else if (this.body.touching.left) {
-                this.setAccelerationX(this.ACCELERATION);
+                this.setVelocityX (800);
                 this.setVelocityY(-this.JUMP_FORCE);
-                this.setVelocityY(-this.JUMP_FORCE);
+                if (!this.momentumEnable){
+                    this.leftLock = 15;
+                }
             //    this.setVelocityX(200);
             //    this.jumpedRightSide = false;
             //    this.jumpedLeftSide = true;
             }
         
-        }
-
-        if (this.body.touching.down) {
-            this.setAccelerationX(0);
-            this.jumpedLeftSide = false;
-            this.jumpedRightSide = false;
         }
     }
 

@@ -23,6 +23,7 @@ class Play extends Phaser.Scene {
     keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    keyJUMP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
@@ -30,7 +31,7 @@ class Play extends Phaser.Scene {
     //Add gameplay objects
     // I set all game object's gravity to false for testing
     this.player = new plChr(this, 300, 300, 'placeholder', 0);
-    this.player.body.setAllowGravity(false);
+    //this.player.body.setAllowGravity(false);
     this.wallGroup = this.add.group();
     this.floorGroup = this.add.group();
 
@@ -108,8 +109,7 @@ class Play extends Phaser.Scene {
     if (Phaser.Input.Keyboard.JustDown(this.keyENTER)) {
 
         if (type == 'gravity') {
-          this.playerGravity = true;
-          this.player.body.setAllowGravity(this.playerGravity);
+          this.player.gravityEnable = true;
 
         } else {
           collider.active = !collider.active;
