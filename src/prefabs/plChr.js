@@ -3,9 +3,9 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-    //    this.jumpedRightSide = false;
-    //    this.jumpedLeftSide = false;
-
+        this.momentumEnable = false;
+        this.gravityEnable = false;
+        this.wallsEnable = false;
         this.JUMP_FORCE = 100;
         this.JUMP_X = 100;
         this.ACCELERATION = 4500;
@@ -19,11 +19,11 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
 
         if(keyLEFT.isDown){
             if(!keyRIGHT.isDown){
-                if (this.body.touching.down || (!this.body.touching.down && !this.body.allowGravity)){
+                if (!this.momentumEnable){
                     this.body.setVelocityX(-800);
                 
                 } else {
-                    this.body.setVelocityX(-this.JUMP_X);
+                 // TODO: add momentum physics
                  //   console.log(this.body.acceleration.x);
 
                     if (this.body.acceleration.x > 0) {
@@ -33,21 +33,20 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
             }
 
         }else if(keyRIGHT.isDown){
-            if (this.body.touching.down || (!this.body.touching.down && !this.body.allowGravity)) {
+            if (!this.momentumEnable) {
                 this.body.setVelocityX(800);
 
             } else {
-                this.body.setVelocityX(this.JUMP_X);
-
+                // TODO: add momentum physics
                 if (this.body.acceleration.x < 0) {
                     this.setAccelerationX(0);
                 }
             }
         }
 
-        if (keySPACE.isDown) {
+        if (keyJUMP.isDown) {
             if (this.body.touching.down && this.body.onFloor()) {
-                this.setVelocityY(-150);
+                this.setVelocityY(-800);
 
             } else if (this.body.touching.right) {
                 this.setAccelerationX(-this.ACCELERATION);
