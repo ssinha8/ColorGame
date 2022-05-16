@@ -10,7 +10,6 @@ class Pause extends Phaser.Scene {
       keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
       keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-      const options = [];
       this.selectedIndex = 0;
   
     
@@ -22,17 +21,11 @@ class Pause extends Phaser.Scene {
         align: 'center',
       }
   
-      const resume = this.add.text((game.config.width/2)-80, 230, "Resume", menuStyle);
-      const checkpt = this.add.text((game.config.width/2)-80, 300, "Return to Last Checkpoint", menuStyle);
-      const main = this.add.text((game.config.width/2)-80, 370, "Return to Main Menu", menuStyle);
+      var resume = this.add.text((game.config.width/2)-80, 230, "Resume", menuStyle).setOrigin(0, 0.5);
+      var checkpt = this.add.text((game.config.width/2)-80, 300, "Return to Last Checkpoint", menuStyle).setOrigin(0, 0.5);
+      var main = this.add.text((game.config.width/2)-80, 370, "Return to Main Menu", menuStyle).setOrigin(0, 0.5);
 
-      resume.setInteractive();
-      checkpt.setInteractive();
-      main.setInteractive();
-
-      options[0] = resume;
-      options[1] = checkpt;
-      options[2] = main;
+      this.options = [resume, checkpt, main];
 
       resume.on('selected', () => {this.scene.start('playScene')});
       main.on('selected', () => {this.scene.start('menuScene')});
@@ -42,17 +35,19 @@ class Pause extends Phaser.Scene {
     update() {
       if (Phaser.Input.Keyboard.JustDown(keyUP)) {
         this.selectOption(-1);
+        console.log("up registered");  // DEBUGGING
       } else if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
         this.selectOption(1); 
+        console.log("down registered"); // DEBUGGING
       } else if (Phaser.Input.Keyboard.JustDown(keySPACE)) {
         //confirm selection logic
 
-        this.options[this.selectedIndex].emit("selected"); 
+        this.options[this.selectedIndex].emit('selected'); 
       }
     }
 
     select(index) {
-      this.options[this.selectIndex].setColor("#FFFFFF");
+      this.options[this.selectedIndex].setColor("#FFFFFF");
 
       this.options[index].setColor("#444444");
 
@@ -62,10 +57,11 @@ class Pause extends Phaser.Scene {
     selectOption(change) {
       let index = this.selectedIndex + change;
 
-      if (index > this.options.length) {
+      // options.length gave type error DEBUG later and avoid hardcoding
+      if (index > 3) {
         index = 0;
       } else if (index < 0) {
-        index = this.options.length - 1;
+        index = 2;
       }
 
       this.select(index);
