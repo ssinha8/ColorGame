@@ -58,7 +58,7 @@ class Pause extends Phaser.Scene {
       let index = this.selectedIndex + change;
 
       // options.length gave type error DEBUG later and avoid hardcoding
-      if (index > 3) {
+      if (index > 2) {
         index = 0;
       } else if (index < 0) {
         index = 2;
