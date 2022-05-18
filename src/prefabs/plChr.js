@@ -6,7 +6,8 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.momentumEnable = false;
         this.gravityEnable = false;
         this.wallsEnable = false;
-        this.JUMP_FORCE = 800;
+        this.FLATMOVESPEED = 400;
+        this.JUMP_FORCE = 400;
         this.ACCELERATION = 4500;
         this.MAX_X_VEL = 1400;
         this.leftLock = 0;
@@ -33,7 +34,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         if(keyLEFT.isDown && this.leftLock == 0){
             if(!keyRIGHT.isDown){
                 if (!this.momentumEnable){
-                    this.body.setVelocityX(-800);
+                    this.body.setVelocityX(-this.FLATMOVESPEED);
                 
                 } else {
                  // TODO: add momentum physics
@@ -47,7 +48,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
 
         }else if(keyRIGHT.isDown && this.rightLock == 0){
             if (!this.momentumEnable) {
-                this.body.setVelocityX(800);
+                this.body.setVelocityX(this.FLATMOVESPEED);
 
             } else {
                 // TODO: add momentum physics
@@ -66,7 +67,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         }
 
 
-        if (this.body.touching.down) {
+        if (this.body.touching.down && this.body.onFloor()) {
             this.setVelocityY(0);
         }
 
@@ -75,24 +76,17 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityY(-this.JUMP_FORCE);
 
             } else if (this.body.touching.right) {
-                this.setVelocityX (-800);
+                this.setVelocityX (-this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if(!this.momentumEnable){
                     this.rightLock = 15;
                 }
-            //    this.setVelocityX(-200);
-           //     this.jumpedRightSide = true;
-            //    this.jumpedLeftSide = false;
-
             } else if (this.body.touching.left) {
-                this.setVelocityX (800);
+                this.setVelocityX (this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if (!this.momentumEnable){
                     this.leftLock = 15;
                 }
-            //    this.setVelocityX(200);
-            //    this.jumpedRightSide = false;
-            //    this.jumpedLeftSide = true;
             }
         
         }

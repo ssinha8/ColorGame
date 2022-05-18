@@ -48,10 +48,10 @@ class Play extends Phaser.Scene {
     }
 
     // Powerup objects
-    this.powerupGravity = new Powerup(this, 500, 300, 'gravity', 0); // Powerup for gravity
+    /*this.powerupGravity = new Powerup(this, 500, 300, 'gravity', 0); // Powerup for gravity
     this.powerupGravity.body.setAllowGravity(false);
     this.powerupWall = new Powerup(this, 700, 300, 'wallPowerup', 0); // Powerup for walls
-    this.powerupWall.body.setAllowGravity(false);
+    this.powerupWall.body.setAllowGravity(false);*/
 
     // Add each wall into the group (for now I just have one):
     this.wall = new Wall(this, 400, 300, 'wall', 0);
