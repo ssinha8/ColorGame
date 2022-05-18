@@ -23,8 +23,8 @@ class Menu extends Phaser.Scene {
     }
 
     const play = this.add.text((game.config.width/2)-80, 230, "Play (P)", menuStyle);
-    play.setInteractive();
-    play.on('pointerdown', () => {this.scene.start('playScene')});
+    this.add.text((game.config.width/2) - 240, 260, "Press 1 to enable gravity", menuStyle);
+    this.add.text((game.config.width/2) - 225, 290, "Press 2 to enable walls", menuStyle);
    }
 
 
