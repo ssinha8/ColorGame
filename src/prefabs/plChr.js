@@ -8,11 +8,19 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.wallsEnable = false;
         this.FLATMOVESPEED = 400;
         this.JUMP_FORCE = 400;
-        this.ACCELERATION = 4500;
-        this.MAX_X_VEL = 1400;
+        this.ACCELERATION = 1000;
+        this.TURNAROUNDACCEL_GROUND = 1400;
+        this.TURNAROUNDACCEL_AIR = 800;
+        this.STAGE1_ACCELTHRESHOLD = 300;
+        this.STAGE1_ACCELFORCE = 1000;
+        this.STAGE2_ACCELTHRESHOLD = 400;
+        this.STAGE2_ACCELFORCE = 200;
+        this.MAXMOMENTUM = 600;
+        this.STAGE3_ACCELFORCE = 50;
         this.lockoutTime = 15;
         this.leftLock = 0;
         this.rightLock = 0;
+        this.body.setMaxVelocityX(this.MAXMOMENTUM);
     }
 
 
@@ -23,7 +31,10 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
             this.wallsEnable = !this.wallsEnable;
         }
-        if(this.leftLock == 0 && this.rightLock == 0){
+        if(Phaser.Input.Keyboard.JustDown(keyDEBUG3)){
+            this.momentumEnable = !this.momentumEnable;
+        }
+        if(this.leftLock == 0 && this.rightLock == 0 && !this.momentumEnable){
             this.body.setVelocityX(0);
         }
         if (this.leftLock > 0){
@@ -32,33 +43,60 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         if (this.rightLock > 0){
             this.rightLock -= 1;
         }
-        if(keyLEFT.isDown && this.leftLock == 0){
-            if(!keyRIGHT.isDown){
-                if (!this.momentumEnable){
-                    this.body.setVelocityX(-this.FLATMOVESPEED);
-                
-                } else {
-                 // TODO: add momentum physics
-                 //   console.log(this.body.acceleration.x);
-
-                    if (this.body.acceleration.x > 0) {
-                        this.setAccelerationX(0);
-                    }
+        if(keyLEFT.isDown && this.leftLock == 0 && !keyRIGHT.isDown){
+            
+            if (!this.momentumEnable){
+                this.body.setVelocityX(-this.FLATMOVESPEED);
+            
+            } else {
+                this.body.setAllowDrag(false);
+                if(this.body.velocity.x >= 0){
+                    this.body.setAccelerationX(-this.TURNAROUNDACCEL_GROUND);
+                }
+                else if(this.body.velocity.x >= -this.STAGE1_ACCELTHRESHOLD){
+                    this.body.setAccelerationX(-this.STAGE1_ACCELFORCE);
+                }
+                else if (this.body.velocity.x >= -this.STAGE2_ACCELTHRESHOLD){
+                    this.body.setAccelerationX(-this.STAGE2_ACCELFORCE);
+                }
+                else{
+                    this.body.setAccelerationX(-this.STAGE3_ACCELFORCE);
                 }
             }
-
-        }else if(keyRIGHT.isDown && this.rightLock == 0){
+        }else if(keyRIGHT.isDown && this.rightLock == 0 && !keyLEFT.isDown){
             if (!this.momentumEnable) {
                 this.body.setVelocityX(this.FLATMOVESPEED);
 
             } else {
-                // TODO: add momentum physics
-                if (this.body.acceleration.x < 0) {
-                    this.setAccelerationX(0);
+                this.body.setAllowDrag(false);
+                if(this.body.velocity.x <= 0){
+                    this.body.setAccelerationX(this.TURNAROUNDACCEL_GROUND);
                 }
+                else if(this.body.velocity.x <= this.STAGE1_ACCELTHRESHOLD){
+                    this.body.setAccelerationX(this.STAGE1_ACCELFORCE);
+                }
+                else if (this.body.velocity.x <= -this.STAGE2_ACCELTHRESHOLD){
+                    this.body.setAccelerationX(this.STAGE2_ACCELFORCE);
+                }
+                else{
+                    this.body.setAccelerationX(this.STAGE3_ACCELFORCE);
+                }
+            }
+        }else{
+            if(this.momentumEnable){
+                this.body.setDragX(800);
+                this.body.setAllowDrag(true);
+                this.body.setAccelerationX(0);
             }
         }
 
+
+
+        if (!this.momentumEnable) {
+            this.body.setAccelerationX(0);
+            this.body.setDragX(0);
+            this.body.setAllowDrag(false);
+        }
         if (this.gravityEnable){
             this.setAccelerationY(800)
         }
