@@ -10,6 +10,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.JUMP_FORCE = 400;
         this.ACCELERATION = 4500;
         this.MAX_X_VEL = 1400;
+        this.lockoutTime = 15;
         this.leftLock = 0;
         this.rightLock = 0;
     }
@@ -79,13 +80,13 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityX (-this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if(!this.momentumEnable){
-                    this.rightLock = 15;
+                    this.rightLock = this.lockoutTime;
                 }
             } else if (this.body.touching.left) {
                 this.setVelocityX (this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if (!this.momentumEnable){
-                    this.leftLock = 15;
+                    this.leftLock = this.lockoutTime;
                 }
             }
         
