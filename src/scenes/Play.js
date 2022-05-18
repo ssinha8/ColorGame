@@ -24,6 +24,9 @@ class Play extends Phaser.Scene {
     keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     keyJUMP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+    keyDEBUG1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+    keyDEBUG2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+    keyDEBUG3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
@@ -34,6 +37,7 @@ class Play extends Phaser.Scene {
     //this.player.body.setAllowGravity(false);
     this.wallGroup = this.add.group();
     this.floorGroup = this.add.group();
+    this.player.body.setAllowGravity(false);
 
     // Floor at bottom
     for (let i = 0; i < game.config.width; i+= 30) {
@@ -85,7 +89,7 @@ class Play extends Phaser.Scene {
     // Physics collider
     this.physics.add.collider(this.player, this.floorGroup);
     this.wallCollider = this.physics.add.collider(this.player, this.wallGroup);
-    this.wallCollider.active = this.wall.canWallCollide;
+    this.wallCollider.active = this.player.wallsEnable;
 
    // Line to enable/disable collision on walls. Have to press enter button or else it triggers constantly
     this.physics.add.overlap(this.player, this.powerupWall, ()=>{this.setCollision('wall', this.wallCollider)}, null, this);
@@ -102,19 +106,11 @@ class Play extends Phaser.Scene {
     }
 
     this.player.update();
+    this.wallCollider.active = this.player.wallsEnable;
   }
 
 
   setCollision(type, collider) {
-    if (Phaser.Input.Keyboard.JustDown(this.keyENTER)) {
-
-        if (type == 'gravity') {
-          this.player.gravityEnable = true;
-
-        } else {
-          collider.active = !collider.active;
-        }
-    }
   }
 
   /*
