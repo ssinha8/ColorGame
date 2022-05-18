@@ -2,6 +2,10 @@ let config = {
     type: Phaser.AUTO,
     width: 960, //TODO: finalize width/height
     height: 540, // and see if we can fix the bug that doubles the size
+    fps: {
+        target: 60, 
+        forceSetTimeOut: true
+        },
     physics: {
         default: 'arcade',
         arcade: {
