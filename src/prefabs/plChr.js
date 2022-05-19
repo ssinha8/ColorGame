@@ -1,5 +1,5 @@
 class plChr extends Phaser.Physics.Arcade.Sprite{
-    constructor(scene, x, y, texture, frame, canWallJump){
+    constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -16,7 +16,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.STAGE2_ACCELTHRESHOLD = 400;
         this.STAGE2_ACCELFORCE = 200;
         this.MAXMOMENTUM = 600;
-        this.STAGE3_ACCELFORCE = 50;
+        this.STAGE3_ACCELFORCE = 125;
         this.lockoutTime = 15;
         this.leftLock = 0;
         this.rightLock = 0;
