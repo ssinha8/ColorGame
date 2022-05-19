@@ -102,7 +102,8 @@ class Play extends Phaser.Scene {
   update() {
 
     if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
-      this.scene.start('pauseScene');
+      this.scene.launch('pauseScene');
+      this.scene.pause();
     }
 
     this.player.update();
