@@ -27,7 +27,10 @@ class Pause extends Phaser.Scene {
 
       this.options = [resume, checkpt, main];
 
-      resume.on('selected', () => {this.scene.start('playScene')});
+      resume.on('selected', () => {
+        this.scene.resume('playScene');
+        this.scene.stop();
+      });
       main.on('selected', () => {this.scene.start('menuScene')});
     }
   
