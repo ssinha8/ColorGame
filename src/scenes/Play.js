@@ -9,13 +9,31 @@ class Play extends Phaser.Scene {
     this.load.image('gravity', './assets/gravity.png');
     this.load.image('wallPowerup', './assets/wallPowerup.png');
     this.load.image('wall', './assets/wall.png');
+    this.load.image('smoke', './assets/wisp4.png');
+    // this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
+    //   frameWidth: 16,
+    //   frameHeight: 16
+    // });
+    // this.load.tilemapTiledJSON("platform_map", "./assets/tempMap.json");    // Tiled JSON file
 
   }
 
   // Does nothing right now
   create() {
+
+    // const map = this.add.tilemap("platform_map");
+    // // add a tileset to the map
+    // const tileset = map.addTilesetImage("tempTiles", "1bit_tiles");
+    // // create tilemap layers
+    // const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+
+    // groundLayer.setCollisionByProperty({ 
+    //   collides: true 
+    // });
+    
     // Boolean checks for game mechanics
     this.playerGravity = false;
+    this.particleOn = false;
 
     //Set up keys
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -83,6 +101,25 @@ class Play extends Phaser.Scene {
       this.wallGroup.add(wall2);
     }
 
+    this.particles = this.add.particles('smoke');
+    console.log(this.particles);
+
+    this.emitter = this.particles.createEmitter({
+      speed: 50,
+      gravity: {x: 200, y: 200},
+      alpha: 0.1,
+   //   angle: this.player.body.angle,,
+  // scaleY: .12,
+      scale: {start: .09, end: .05},
+    //  scaleX: .08,
+      lifespan: 300,
+      on: false,
+      follow: this.player
+    });
+
+    console.log(this.emitter.width);
+   // this.emitter.flow(1000);
+
     // For testing purposes
     this.wall.body.setAllowGravity(false);
 
@@ -106,8 +143,26 @@ class Play extends Phaser.Scene {
       this.scene.pause();
     }
 
+  //  console.log(this.player.body.angle);
+
     this.player.update();
     this.wallCollider.active = this.player.wallsEnable;
+  
+    if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
+   //   this.emitter.start();
+      if (!this.particleOn) {
+        this.particleOn = true;
+        this.emitter.flow(70, 3);
+      }
+
+      if (this.particleOn) {
+        this.emitter.setAngle(180);
+      }
+
+    } else {
+      this.emitter.stop();
+      this.particleOn = false;
+    }
   }
 
 
