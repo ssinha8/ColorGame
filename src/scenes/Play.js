@@ -10,11 +10,27 @@ class Play extends Phaser.Scene {
     this.load.image('wallPowerup', './assets/wallPowerup.png');
     this.load.image('wall', './assets/wall.png');
     this.load.image('smoke', './assets/wisp4.png');
+    // this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
+    //   frameWidth: 16,
+    //   frameHeight: 16
+    // });
+    // this.load.tilemapTiledJSON("platform_map", "./assets/tempMap.json");    // Tiled JSON file
 
   }
 
   // Does nothing right now
   create() {
+
+    // const map = this.add.tilemap("platform_map");
+    // // add a tileset to the map
+    // const tileset = map.addTilesetImage("tempTiles", "1bit_tiles");
+    // // create tilemap layers
+    // const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+
+    // groundLayer.setCollisionByProperty({ 
+    //   collides: true 
+    // });
+    
     // Boolean checks for game mechanics
     this.playerGravity = false;
     this.particleOn = false;
