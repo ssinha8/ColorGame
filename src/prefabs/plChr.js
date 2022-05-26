@@ -63,7 +63,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                     this.body.setAccelerationX(-this.STAGE3_ACCELFORCE);
                 }
             }
-        }else if(keyRIGHT.isDown && this.rightLock == 0 && !keyLEFT.isDown){
+        } else if(keyRIGHT.isDown && this.rightLock == 0 && !keyLEFT.isDown){
             if (!this.momentumEnable) {
                 this.body.setVelocityX(this.FLATMOVESPEED);
 
