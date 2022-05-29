@@ -10,26 +10,26 @@ class Play extends Phaser.Scene {
     this.load.image('wallPowerup', './assets/wallPowerup.png');
     this.load.image('wall', './assets/wall.png');
     this.load.image('smoke', './assets/wisp4.png');
-    // this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
-    //   frameWidth: 16,
-    //   frameHeight: 16
-    // });
-    // this.load.tilemapTiledJSON("platform_map", "./assets/tempMap.json");    // Tiled JSON file
+    this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
+      frameWidth: 16,
+      frameHeight: 16
+    });
+    this.load.tilemapTiledJSON("platform_map", "./assets/tempMap.json");    // Tiled JSON file
 
   }
 
   // Does nothing right now
   create() {
 
-    // const map = this.add.tilemap("platform_map");
-    // // add a tileset to the map
-    // const tileset = map.addTilesetImage("tempTiles", "1bit_tiles");
-    // // create tilemap layers
-    // const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+    const map = this.add.tilemap("platform_map");
+    // add a tileset to the map
+    const tileset = map.addTilesetImage("tempTiles", "1bit_tiles");
+    // create tilemap layers
+    const groundLayer = map.createLayer("Ground", tileset, 0, 0);
 
-    // groundLayer.setCollisionByProperty({ 
-    //   collides: true 
-    // });
+    groundLayer.setCollisionByProperty({ 
+      collides: true 
+    });
     
     // Boolean checks for game mechanics
     this.playerGravity = false;
@@ -51,11 +51,12 @@ class Play extends Phaser.Scene {
 
     //Add gameplay objects
     // I set all game object's gravity to false for testing
-    this.player = new plChr(this, 300, 300, 'placeholder', 0);
+    // this.player = new plChr(this, 300, 300, 'placeholder', 0);
+    this.player = new plChr(this, 300, 300, "kenney_sheet", 4);
     //this.player.body.setAllowGravity(false);
-    this.wallGroup = this.add.group();
-    this.floorGroup = this.add.group();
-    this.player.body.setAllowGravity(false);
+    // this.wallGroup = this.add.group();
+    // this.floorGroup = this.add.group();
+    // this.player.body.setAllowGravity(false);
 
     // Floor at bottom
     for (let i = 0; i < game.config.width; i+= 30) {
