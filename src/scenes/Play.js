@@ -23,7 +23,7 @@ class Play extends Phaser.Scene {
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
-    const tileset = map.addTilesetImage("tempTiles", "1bit_tiles");
+    const tileset = map.addTilesetImage("tempTiles", "./assets/tempTiles.png");
     // create tilemap layers
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
 
@@ -59,12 +59,13 @@ class Play extends Phaser.Scene {
     // this.player.body.setAllowGravity(false);
 
     // Floor at bottom
-    for (let i = 0; i < game.config.width; i+= 30) {
+
+    /* for (let i = 0; i < game.config.width; i+= 30) {
       let groundTile = this.physics.add.sprite(i, game.config.height - 30, 'placeholder').setOrigin(0);
       groundTile.body.setAllowGravity(false);
       groundTile.body.immovable = true;
       this.floorGroup.add(groundTile);
-    }
+    } */
 
     // Powerup objects
     /*this.powerupGravity = new Powerup(this, 500, 300, 'gravity', 0); // Powerup for gravity
@@ -73,13 +74,13 @@ class Play extends Phaser.Scene {
     this.powerupWall.body.setAllowGravity(false);*/
 
     // Add each wall into the group (for now I just have one):
-    this.wall = new Wall(this, 400, 300, 'wall', 0);
-   // console.log(this.wall.body.checkCollision);
+    /* this.wall = new Wall(this, 400, 300, 'wall', 0);
+    // console.log(this.wall.body.checkCollision);
     this.wall.body.immovable = true;
-    this.wallGroup.add(this.wall);
+    this.wallGroup.add(this.wall); */
 
     // Walls on floor to test wall jumping
-    for (let i = 490; i > 380; i -= 30) {
+    /* for (let i = 490; i > 380; i -= 30) {
       let wall = new Wall(this, 460, i, 'wall');
       let wall2 = new Wall(this, 600, i, 'wall');
       
@@ -100,7 +101,7 @@ class Play extends Phaser.Scene {
       wall2.body.setAllowGravity(false);
       this.wallGroup.add(wall);
       this.wallGroup.add(wall2);
-    }
+    } */
 
     this.particles = this.add.particles('smoke');
     console.log(this.particles);
@@ -116,13 +117,13 @@ class Play extends Phaser.Scene {
       lifespan: 300,
       on: false,
       follow: this.player
-    });
+    }); 
 
-    console.log(this.emitter.width);
+   // console.log(this.emitter.width);
    // this.emitter.flow(1000);
 
     // For testing purposes
-    this.wall.body.setAllowGravity(false);
+    /* this.wall.body.setAllowGravity(false);
 
     // Physics collider
     this.physics.add.collider(this.player, this.floorGroup);
@@ -133,7 +134,7 @@ class Play extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.powerupWall, ()=>{this.setCollision('wall', this.wallCollider)}, null, this);
 
     // Line to enable/disable gravity
-    this.physics.add.overlap(this.player, this.powerupGravity, ()=>{this.setCollision('gravity')}, null, this);
+    this.physics.add.overlap(this.player, this.powerupGravity, ()=>{this.setCollision('gravity')}, null, this); */
   }
 
   
