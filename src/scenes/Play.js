@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
     this.load.image('wallPowerup', './assets/wallPowerup.png');
     this.load.image('wall', './assets/wall.png');
     this.load.image('smoke', './assets/wisp4.png');
+    this.load.image('tileImage', './assets/tempTiles.png');
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
       frameHeight: 16
@@ -23,9 +24,9 @@ class Play extends Phaser.Scene {
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
-    const tileset = map.addTilesetImage("tempTiles", "./assets/tempTiles.png");
+    const tileset = map.addTilesetImage("tempTiles", "tileImage");
     // create tilemap layers
-    const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+    const groundLayer = map.createLayer("Tile Layer 1", tileset, 0, 0);
 
     groundLayer.setCollisionByProperty({ 
       collides: true 
@@ -52,7 +53,7 @@ class Play extends Phaser.Scene {
     //Add gameplay objects
     // I set all game object's gravity to false for testing
     // this.player = new plChr(this, 300, 300, 'placeholder', 0);
-    this.player = new plChr(this, 300, 300, "kenney_sheet", 4);
+    this.player = new plChr(this, 300, 100, "kenney_sheet", 4);
     //this.player.body.setAllowGravity(false);
     // this.wallGroup = this.add.group();
     // this.floorGroup = this.add.group();
@@ -148,7 +149,7 @@ class Play extends Phaser.Scene {
   //  console.log(this.player.body.angle);
 
     this.player.update();
-    this.wallCollider.active = this.player.wallsEnable;
+    // this.wallCollider.active = this.player.wallsEnable; 
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
    //   this.emitter.start();
