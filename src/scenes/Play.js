@@ -26,7 +26,12 @@ class Play extends Phaser.Scene {
     // add a tileset to the map
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
     // create tilemap layers
+    const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Tile Layer 1", tileset, 0, 0);
+
+    wallLayer.setCollisionByProperty({ 
+      collides: true 
+    });
 
     groundLayer.setCollisionByProperty({ 
       collides: true 
@@ -126,6 +131,8 @@ class Play extends Phaser.Scene {
     // For testing purposes
 
     this.physics.add.collider(this.player, groundLayer);
+    this.wallCollider = this.physics.add.collider(this.player, wallLayer);
+    this.wallCollider.active = this.player.wallsEnable;
     /* this.wall.body.setAllowGravity(false);
 
     // Physics collider
@@ -151,7 +158,10 @@ class Play extends Phaser.Scene {
   //  console.log(this.player.body.angle);
 
     this.player.update();
-    // this.wallCollider.active = this.player.wallsEnable; 
+
+   // console.log(this.player.wallsEnable);
+
+     this.wallCollider.active = this.player.wallsEnable; 
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
    //   this.emitter.start();
