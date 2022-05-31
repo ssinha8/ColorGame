@@ -54,7 +54,7 @@ class Play extends Phaser.Scene {
     // I set all game object's gravity to false for testing
     // this.player = new plChr(this, 300, 300, 'placeholder', 0);
     this.player = new plChr(this, 300, 100, "kenney_sheet", 4);
-    //this.player.body.setAllowGravity(false);
+    this.player.body.setAllowGravity(false);
     // this.wallGroup = this.add.group();
     // this.floorGroup = this.add.group();
     // this.player.body.setAllowGravity(false);
@@ -124,6 +124,8 @@ class Play extends Phaser.Scene {
    // this.emitter.flow(1000);
 
     // For testing purposes
+
+    this.physics.add.collider(this.player, groundLayer);
     /* this.wall.body.setAllowGravity(false);
 
     // Physics collider
