@@ -27,7 +27,7 @@ class Play extends Phaser.Scene {
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
     // create tilemap layers
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
-    const groundLayer = map.createLayer("Tile Layer 1", tileset, 0, 0);
+    const groundLayer = map.createLayer("Ground", tileset, 0, 0);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
