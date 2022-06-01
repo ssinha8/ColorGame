@@ -26,16 +26,25 @@ class Play extends Phaser.Scene {
     // add a tileset to the map
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
     // create tilemap layers
+    this.spikeLayer = map.createLayer("Spike", tileset, 0, 0);
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+
+    this.spikeLayer.setCollisionByProperty({
+      collides: true
+    });
+    this.spikeLayer.setDepth(2);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
     });
+ //   wallLayer.setDepth(0);
 
     groundLayer.setCollisionByProperty({ 
       collides: true 
     });
+
+  //  groundLayer.setDepth(0);
     
     // Boolean checks for game mechanics
     this.playerGravity = false;
@@ -51,6 +60,7 @@ class Play extends Phaser.Scene {
     keyDEBUG1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
     keyDEBUG2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
     keyDEBUG3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+    keyDEBUG4 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
@@ -131,8 +141,19 @@ class Play extends Phaser.Scene {
     // For testing purposes
 
     this.physics.add.collider(this.player, groundLayer);
+
     this.wallCollider = this.physics.add.collider(this.player, wallLayer);
     this.wallCollider.active = this.player.wallsEnable;
+
+    this.spikeCollider = this.physics.add.collider(this.player, this.spikeLayer, () => {
+      if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
+        console.log("hit bottom");
+      }
+    });
+    this.spikeCollider.active = this.player.spikeEnable;
+    this.spikeLayer.setAlpha(0);
+
+    console.log(this.spikeLayer.visible);
     /* this.wall.body.setAllowGravity(false);
 
     // Physics collider
@@ -159,9 +180,26 @@ class Play extends Phaser.Scene {
 
     this.player.update();
 
+    if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
+      this.player.wallsEnable = !this.wallsEnable;
+      this.wallCollider.active = this.player.wallsEnable; 
+    }
+
    // console.log(this.player.wallsEnable);
 
-     this.wallCollider.active = this.player.wallsEnable; 
+
+     if (Phaser.Input.Keyboard.JustDown(keyDEBUG4)) {
+      this.player.spikeEnable = !this.player.spikeEnable;
+
+      if (this.player.spikeEnable) {
+        this.spikeLayer.setAlpha(1);
+       
+      } else {
+        this.spikeLayer.setAlpha(0);
+       }
+
+       this.spikeCollider.active = this.player.spikeEnable;
+    }
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
    //   this.emitter.start();

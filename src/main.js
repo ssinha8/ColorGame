@@ -2,10 +2,10 @@ let config = {
     type: Phaser.AUTO,
     width: 960, //TODO: finalize width/height (width: 60 tiles, height: 34)
     height: 544, // and see if we can fix the bug that doubles the size
-    fps: {
+ /*   fps: {
         target: 60, 
         forceSetTimeOut: true
-        },
+        }, */
     physics: {
         default: 'arcade',
         arcade: {
@@ -16,5 +16,5 @@ let config = {
     scene: [Menu, Pause, Play]
 }
 
-let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE, keySPACE, keyDEBUG1, keyDEBUG2, keyDEBUG3;
+let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE, keySPACE, keyDEBUG1, keyDEBUG2, keyDEBUG3, keyDEBUG4;
 let game = new Phaser.Game(config);
