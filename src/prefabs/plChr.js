@@ -7,6 +7,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.gravityEnable = false;
         this.spikeEnable = false;
         this.wallsEnable = false;
+        this.springEnable = false;
         this.FLATMOVESPEED = 400;
         this.JUMP_FORCE = 400;
         this.ACCELERATION = 1000;
@@ -29,10 +30,9 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         if(Phaser.Input.Keyboard.JustDown(keyDEBUG1)){
             this.gravityEnable = !this.gravityEnable;
         }
-      /* if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
+       if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
             this.wallsEnable = !this.wallsEnable;
         }
-        */
         if(Phaser.Input.Keyboard.JustDown(keyDEBUG3)){
             this.momentumEnable = !this.momentumEnable;
         }
@@ -104,11 +104,6 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         }
         else{
             this.setAccelerationY(0);
-            this.setVelocityY(0);
-        }
-
-
-        if (this.body.onFloor()) {
             this.setVelocityY(0);
         }
 

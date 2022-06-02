@@ -21,30 +21,41 @@ class Play extends Phaser.Scene {
 
   // Does nothing right now
   create() {
+    this.launchSpeed = -530;
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
-    // create tilemap layers
-    this.spikeLayer = map.createLayer("Spike", tileset, 0, 0);
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
-
-    this.spikeLayer.setCollisionByProperty({
-      collides: true
-    });
-    this.spikeLayer.setDepth(2);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
     });
- //   wallLayer.setDepth(0);
+    wallLayer.setDepth(1);
 
     groundLayer.setCollisionByProperty({ 
       collides: true 
     });
 
-  //  groundLayer.setDepth(0);
+    this.spikes = map.createFromObjects("Spike", {
+      name: "spike",
+      key: "kenney_sheet",
+      frame: 7
+    });
+
+    this.springs = map.createFromObjects("Spring", {
+      name: "spring",
+      key: "kenney_sheet",
+      frame: 8
+    })
+
+    this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.springs, Phaser.Physics.Arcade.STATIC_BODY);
+
+    this.spikeGroup = this.add.group(this.spikes);
+    this.springGroup = this.add.group(this.springs);
+
     
     // Boolean checks for game mechanics
     this.playerGravity = false;
@@ -61,63 +72,16 @@ class Play extends Phaser.Scene {
     keyDEBUG2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
     keyDEBUG3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
     keyDEBUG4 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+    keyDEBUG5 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
     this.keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
 
     //Add gameplay objects
-    // I set all game object's gravity to false for testing
-    // this.player = new plChr(this, 300, 300, 'placeholder', 0);
-    this.player = new plChr(this, 300, 100, "kenney_sheet", 4);
+    const playerSpawn = map.findObject("PlayerSpawn", obj => obj.name === "player spawn");
+    this.player = new plChr(this, playerSpawn.x, playerSpawn.y, "kenney_sheet", 4);
     this.player.body.setAllowGravity(false);
-    // this.wallGroup = this.add.group();
-    // this.floorGroup = this.add.group();
-    // this.player.body.setAllowGravity(false);
-
-    // Floor at bottom
-
-    /* for (let i = 0; i < game.config.width; i+= 30) {
-      let groundTile = this.physics.add.sprite(i, game.config.height - 30, 'placeholder').setOrigin(0);
-      groundTile.body.setAllowGravity(false);
-      groundTile.body.immovable = true;
-      this.floorGroup.add(groundTile);
-    } */
-
-    // Powerup objects
-    /*this.powerupGravity = new Powerup(this, 500, 300, 'gravity', 0); // Powerup for gravity
-    this.powerupGravity.body.setAllowGravity(false);
-    this.powerupWall = new Powerup(this, 700, 300, 'wallPowerup', 0); // Powerup for walls
-    this.powerupWall.body.setAllowGravity(false);*/
-
-    // Add each wall into the group (for now I just have one):
-    /* this.wall = new Wall(this, 400, 300, 'wall', 0);
-    // console.log(this.wall.body.checkCollision);
-    this.wall.body.immovable = true;
-    this.wallGroup.add(this.wall); */
-
-    // Walls on floor to test wall jumping
-    /* for (let i = 490; i > 380; i -= 30) {
-      let wall = new Wall(this, 460, i, 'wall');
-      let wall2 = new Wall(this, 600, i, 'wall');
-      
-      wall.body.immovable = true;
-      wall2.body.immovable = true;
-
-      if (i == 400) {
-        wall.body.checkCollision.up = true;
-      
-      } else {
-        wall.body.checkCollision.up = false;
-        wall.body.checkCollision.down = false;
-        wall2.body.checkCollision.up = false;
-        wall2.body.checkCollision.down = false;
-      }
-
-      wall.body.setAllowGravity(false);
-      wall2.body.setAllowGravity(false);
-      this.wallGroup.add(wall);
-      this.wallGroup.add(wall2);
-    } */
+    this.player.setDepth(3);
 
     this.particles = this.add.particles('smoke');
     console.log(this.particles);
@@ -135,37 +99,30 @@ class Play extends Phaser.Scene {
       follow: this.player
     }); 
 
-   // console.log(this.emitter.width);
-   // this.emitter.flow(1000);
-
-    // For testing purposes
-
+    // Colliders:
+    // Ground and wall colliders
     this.physics.add.collider(this.player, groundLayer);
 
     this.wallCollider = this.physics.add.collider(this.player, wallLayer);
     this.wallCollider.active = this.player.wallsEnable;
 
-    this.spikeCollider = this.physics.add.collider(this.player, this.spikeLayer, () => {
+    // Spike collider
+    this.spikeCollider = this.physics.add.collider(this.player, this.spikeGroup, () => {
       if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
         console.log("hit bottom");
       }
     });
     this.spikeCollider.active = this.player.spikeEnable;
-    this.spikeLayer.setAlpha(0);
+    this.spikeGroup.setAlpha(0);
 
-    console.log(this.spikeLayer.visible);
-    /* this.wall.body.setAllowGravity(false);
-
-    // Physics collider
-    this.physics.add.collider(this.player, this.floorGroup);
-    this.wallCollider = this.physics.add.collider(this.player, this.wallGroup);
-    this.wallCollider.active = this.player.wallsEnable;
-
-   // Line to enable/disable collision on walls. Have to press enter button or else it triggers constantly
-    this.physics.add.overlap(this.player, this.powerupWall, ()=>{this.setCollision('wall', this.wallCollider)}, null, this);
-
-    // Line to enable/disable gravity
-    this.physics.add.overlap(this.player, this.powerupGravity, ()=>{this.setCollision('gravity')}, null, this); */
+    // Spring Collider
+    this.springCollider = this.physics.add.collider(this.player, this.springGroup, () => {
+      if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
+        this.player.setVelocityY(this.launchSpeed);
+      }
+    });
+    this.springCollider.active = this.player.springEnable;
+    this.springGroup.setAlpha(0);
   }
 
   
@@ -180,29 +137,36 @@ class Play extends Phaser.Scene {
 
     this.player.update();
 
-    if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
-      this.player.wallsEnable = !this.wallsEnable;
+  //  if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
+ //     this.player.wallsEnable = !this.wallsEnable;
       this.wallCollider.active = this.player.wallsEnable; 
-    }
-
-   // console.log(this.player.wallsEnable);
-
+ //   }
 
      if (Phaser.Input.Keyboard.JustDown(keyDEBUG4)) {
       this.player.spikeEnable = !this.player.spikeEnable;
 
       if (this.player.spikeEnable) {
-        this.spikeLayer.setAlpha(1);
+        this.spikeGroup.setAlpha(1);
        
       } else {
-        this.spikeLayer.setAlpha(0);
+        this.spikeGroup.setAlpha(0);
        }
-
        this.spikeCollider.active = this.player.spikeEnable;
+    }
+
+    if (Phaser.Input.Keyboard.JustDown(keyDEBUG5)) {
+      this.player.springEnable = !this.player.springEnable;
+
+      if (this.player.springEnable) {
+        this.springGroup.setAlpha(1);
+       
+      } else {
+        this.springGroup.setAlpha(0);
+      }
+       this.springCollider.active = this.player.springEnable;
     }
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
-   //   this.emitter.start();
       if (!this.particleOn) {
         this.particleOn = true;
         this.emitter.flow(70, 3);
@@ -217,24 +181,4 @@ class Play extends Phaser.Scene {
       this.particleOn = false;
     }
   }
-
-
-  setCollision(type, collider) {
-  }
-
-  /*
-  setCollider(collider) {
-    if (Phaser.Input.Keyboard.JustDown(this.keyENTER)) {
-      collider.active = !collider.active;
-    }
-  }
-
-  setPlayerGravity() {
-    if (Phaser.Input.Keyboard.JustDown(this.keyENTER)) {
-    //  console.log('test');
-      this.playerGravity = true;
-      this.player.body.setAllowGravity(this.playerGravity);
-    }
-  }
-*/
 }
