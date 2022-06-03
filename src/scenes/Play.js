@@ -19,8 +19,11 @@ class Play extends Phaser.Scene {
 
   }
 
-  // Does nothing right now
+
   create() {
+
+    this.cameras.main.setBounds(0, 0, 960 * 6, 544 * 5);
+
     this.launchSpeed = -530;
 
     const map = this.add.tilemap("platform_map");
@@ -113,7 +116,7 @@ class Play extends Phaser.Scene {
       }
     });
     this.spikeCollider.active = this.player.spikeEnable;
-    this.spikeGroup.setAlpha(0);
+    //this.spikeGroup.setAlpha(0);
 
     // Spring Collider
     this.springCollider = this.physics.add.collider(this.player, this.springGroup, () => {
@@ -122,7 +125,9 @@ class Play extends Phaser.Scene {
       }
     });
     this.springCollider.active = this.player.springEnable;
-    this.springGroup.setAlpha(0);
+    //this.springGroup.setAlpha(0);
+
+    this.cameras.main.startFollow(this.player);
   }
 
   
