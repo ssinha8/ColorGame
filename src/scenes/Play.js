@@ -104,9 +104,19 @@ class Play extends Phaser.Scene {
 
     // Colliders:
     // Ground and wall colliders
-    this.physics.add.collider(this.player, groundLayer);
+    this.physics.add.collider(this.player, groundLayer, () => {
+      if (this.player.body.onWall()) {
+      //  console.log(this.player.body.onWall());
+        this.player.touchGroundWall = true;
+      }
+    });
 
-    this.wallCollider = this.physics.add.collider(this.player, wallLayer);
+    this.wallCollider = this.physics.add.collider(this.player, wallLayer, () => {
+      if (this.player.body.onWall()) {
+      //  console.log(this.player.body.onWall());
+        this.player.touchGroundWall = false;
+      }
+    });
     this.wallCollider.active = this.player.wallsEnable;
 
     // Spike collider
@@ -150,12 +160,13 @@ class Play extends Phaser.Scene {
      if (Phaser.Input.Keyboard.JustDown(keyDEBUG4)) {
       this.player.spikeEnable = !this.player.spikeEnable;
 
-      if (this.player.spikeEnable) {
+    /*  if (this.player.spikeEnable) {
         this.spikeGroup.setAlpha(1);
        
       } else {
         this.spikeGroup.setAlpha(0);
        }
+    */
        this.spikeCollider.active = this.player.spikeEnable;
     }
 
