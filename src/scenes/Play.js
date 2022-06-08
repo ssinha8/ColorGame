@@ -11,6 +11,9 @@ class Play extends Phaser.Scene {
     this.load.image('smallTile', './assets/48x48.png');
     this.load.image('springTile', './assets/SpringFrames.png');
     this.load.image('playerTiles', './assets/TurnArounds.png');
+
+    // Audio
+    this.load.audio('bgMusic', './assets/sound1.wav');
   //  this.load.image('background', './assets/bg.jpg');
 
     this.load.spritesheet("Bg", "./assets/bg.jpg", {
@@ -74,6 +77,8 @@ class Play extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 960 * 6, 544 * 5);
     this.activeRespawn = null;
     this.altars = this.add.container();
+    this.bgMusic = this.sound.add('bgMusic', {loop: true});
+    this.bgMusic.play();
 
     this.launchSpeed = -800;
 
