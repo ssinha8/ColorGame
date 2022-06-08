@@ -23,7 +23,7 @@ class Play extends Phaser.Scene {
     this.activeRespawn = null;
     this.altars = this.add.container();
 
-    this.launchSpeed = -530;
+    this.launchSpeed = -800;
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
