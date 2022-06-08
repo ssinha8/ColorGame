@@ -120,12 +120,14 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
                 this.setVelocityY(-this.JUMP_FORCE);
 
             } else if (this.body.blocked.right && this.body.velocity.y > 0) {
+            } else if (this.body.blocked.right && !this.body.onFloor() && !this.touchGroundWall) {
                 this.setVelocityX (-this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if(!this.momentumEnable){
                     this.rightLock = this.lockoutTime;
                 }
             } else if (this.body.blocked.left && this.body.velocity.y > 0) {
+            } else if (this.body.blocked.left && !this.body.onFloor() && !this.touchGroundWall) {
                 this.setVelocityX (this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if (!this.momentumEnable){
