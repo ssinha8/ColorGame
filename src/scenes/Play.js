@@ -207,7 +207,7 @@ class Play extends Phaser.Scene {
     this.player.setDepth(3);
 
 
-    this.enemy1 = new enemy(this, 650, 200, 'kenney_sheet', 4, 1, 3);
+    this.enemy1 = new enemy(this, 650, 200, 'kenney_sheet', 4, 1, 2);
 
     this.particles = this.add.particles('smoke');
     console.log(this.particles);
