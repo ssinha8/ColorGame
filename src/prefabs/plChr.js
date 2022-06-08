@@ -29,15 +29,6 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
 
 
     update(){
-        if(Phaser.Input.Keyboard.JustDown(keyDEBUG1)){
-            this.gravityEnable = !this.gravityEnable;
-        }
-       if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
-            this.wallsEnable = !this.wallsEnable;
-        }
-        if(Phaser.Input.Keyboard.JustDown(keyDEBUG3)){
-            this.momentumEnable = !this.momentumEnable;
-        }
         if(this.leftLock == 0 && this.rightLock == 0 && !this.momentumEnable){
             this.body.setVelocityX(0);
         }

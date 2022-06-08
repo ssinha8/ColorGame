@@ -57,8 +57,6 @@ class Play extends Phaser.Scene {
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
- //   const respawnNotActive = map.createLayer("Respawn", tileset, 0, 0);
- //   const test = map.cre
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
@@ -69,12 +67,6 @@ class Play extends Phaser.Scene {
       collides: true 
     });
 
-  /*  respawnNotActive.setCollisionByProperty({
-      collides: true
-    });
-
-    respawnNotActive.setDepth(1);
-*/
     this.spikes = map.createFromObjects("Spike", {
       name: "spike",
       key: "kenney_sheet",
@@ -176,16 +168,6 @@ class Play extends Phaser.Scene {
       key: "spring_sheet",
       frame: 0
     });
- /*   this.respawnNotActive = map.createFromObjects("EnemyAltar", {
-      name: "test",
-      key: "test1",
-    //  frame: 1
-    });
-*/
- /*   this.altars = map.getObjectLayer("Respawn");
-    this.altars.objects.forEach(object => { 
-      console.log(object);
-    */
 
     this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.springs, Phaser.Physics.Arcade.STATIC_BODY);
@@ -253,7 +235,6 @@ class Play extends Phaser.Scene {
     // Ground and wall colliders
     this.physics.add.collider(this.player, groundLayer, () => {
       if (this.player.body.onWall()) {
-      //  console.log(this.player.body.onWall());
         this.player.touchGroundWall = true;
       }
     });
@@ -295,7 +276,6 @@ class Play extends Phaser.Scene {
       }
     });
     this.spikeCollider.active = this.player.spikeEnable;
-    //this.spikeGroup.setAlpha(0);
 
     // Spring Collider
     this.springCollider = this.physics.add.collider(this.player, this.springGroup, () => {
@@ -304,16 +284,12 @@ class Play extends Phaser.Scene {
       }
     });
     this.springCollider.active = this.player.springEnable;
-    //this.springGroup.setAlpha(0);
-
 
     // Respawn colliders
     this.physics.add.overlap(this.player, this.gravAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-    //  console.log(this.gravAltar[0]);
 
       if (this.gravAltar[0].active) {
-     //   console.log(this.gravAltar[0].active);
         this.player.gravityEnable = true;
         this.gravAltar[0].destroy();
         this.gravPowerup[0].destroy();
@@ -384,31 +360,6 @@ class Play extends Phaser.Scene {
 
     this.player.update();
     this.enemy1.update();
-
-     if (Phaser.Input.Keyboard.JustDown(keyDEBUG4)) {
-      this.player.spikeEnable = !this.player.spikeEnable;
-
-    /*  if (this.player.spikeEnable) {
-        this.spikeGroup.setAlpha(1);
-       
-      } else {
-        this.spikeGroup.setAlpha(0);
-       }
-    */
-       this.spikeCollider.active = this.player.spikeEnable;
-    }
-
-    if (Phaser.Input.Keyboard.JustDown(keyDEBUG5)) {
-      this.player.springEnable = !this.player.springEnable;
-
-      if (this.player.springEnable) {
-        this.springGroup.setAlpha(1);
-       
-      } else {
-        this.springGroup.setAlpha(0);
-      }
-       this.springCollider.active = this.player.springEnable;
-    }
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
       if (!this.particleOn) {

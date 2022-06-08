@@ -23,11 +23,11 @@ class Menu extends Phaser.Scene {
     }
 
     const play = this.add.text((game.config.width/2)-80, 230, "Play (P)", menuStyle);
-    this.add.text((game.config.width/2) - 240, 260, "Press 1 to toggle gravity", menuStyle);
+  /*  this.add.text((game.config.width/2) - 240, 260, "Press 1 to toggle gravity", menuStyle);
     this.add.text((game.config.width/2) - 225, 290, "Press 2 to toggle walls", menuStyle);
     this.add.text((game.config.width/2) - 248, 320, "Press 3 to toggle momentum", menuStyle);
     this.add.text((game.config.width/2) - 248, 350, "Press 4 to toggle spikes", menuStyle);
-    this.add.text((game.config.width/2) - 248, 380, "Press 5 to toggle springs", menuStyle);
+    this.add.text((game.config.width/2) - 248, 380, "Press 5 to toggle springs", menuStyle);*/
    }
 
 
