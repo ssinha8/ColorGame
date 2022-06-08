@@ -11,6 +11,12 @@ class Play extends Phaser.Scene {
     this.load.image('smallTile', './assets/48x48.png');
     this.load.image('springTile', './assets/SpringFrames.png');
     this.load.image('playerTiles', './assets/TurnArounds.png');
+  //  this.load.image('background', './assets/bg.jpg');
+
+    this.load.spritesheet("Bg", "./assets/bg.jpg", {
+      frameWidth: 1920,
+      frameHeight: 1280
+    });
 
     this.load.spritesheet("playerAnims", "./assets/TurnArounds.png", {
       frameWidth: 48,
@@ -71,17 +77,24 @@ class Play extends Phaser.Scene {
   //  const tileset = map.addTilesetImage("tempTiles", "tileImage");
     const groundTileset = map.addTilesetImage("48x48box", "groundTile");
     const smallTileset = map.addTilesetImage("48x48", "smallTile");
-
+ //   const bg = map.addTilesetImage("bg", "background");
     const wallLayer = map.createLayer("Walls", smallTileset, 0, 0);
     const groundLayer = map.createLayer("Ground", [groundTileset, smallTileset], 0, 0);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
     });
-    wallLayer.setDepth(1);
+    wallLayer.setDepth(2);
 
     groundLayer.setCollisionByProperty({ 
       collides: true 
+    });
+    groundLayer.setDepth(1);
+
+    const bg = map.createFromObjects("bg", {
+      name: "background",
+      key: "Bg",
+      frame: 0
     });
 
     this.spikes = map.createFromObjects("Spike", {
