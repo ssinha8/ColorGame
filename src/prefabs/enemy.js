@@ -7,10 +7,11 @@ class enemy extends Phaser.Physics.Arcade.Sprite{
         this.setAccelerationY(1750);
         this.body.setMaxVelocityY(1000);
         this.speedConst = 400;
+        this.accelconst = 600;
         this.behavior = enmType;
         switch(this.behavior){
             case 1: //Back and forth flying
-                this.body.setAccelerationX(600);
+                this.body.setAccelerationX(this.accelconst * this.direction);
             case 2: //Indefinite flying
                 this.speedConst = 400;
                 this.body.setAccelerationY(0);
@@ -19,7 +20,8 @@ class enemy extends Phaser.Physics.Arcade.Sprite{
                 break;
             case 3: //Vertical Flying
                 this.speedConst = 400;
-                this.body.setAccelerationY(400);
+                this.accelconst = 400
+                this.body.setAccelerationY(this.accelconst);
                 this.setVelocityX(0);
                 this.body.setMaxVelocityX(0);
                 break;
@@ -34,10 +36,21 @@ class enemy extends Phaser.Physics.Arcade.Sprite{
     update(){
         if(this.behavior % 2 == 0){
             this.setVelocityX(speedConst * direction);
+            if(this.body.blocked.left || this.body.blocked.right){
+                this.direction = this.direction * -1;
+            }
         }
-
-        if(this.body.blocked.left || this.body.blocked.right){
-            this.direction = this.direction * -1;
+        if (this.behavior == 1){
+            if(this.body.velocity.x * this.direction >= this.speedconst){
+                this.direction = this.direction * -1;
+                this.body.setAccelerationX(this.accelconst * this.direction)
+            }
+        }
+        if (this.behavior == 3){
+            if(this.body.velocity.y * this.direction >= this.speedconst){
+                this.direction = this.direction * -1;
+                this.body.setAccelerationY(this.accelconst * this.direction)
+            }
         }
     }
 
