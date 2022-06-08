@@ -7,6 +7,9 @@ class Play extends Phaser.Scene {
   preload() {
     this.load.image('smoke', './assets/wisp4.png');
     this.load.image('tileImage', './assets/tempTiles.png');
+    this.load.image('groundTile', './assets/48x48box.png');
+    this.load.image('smallTile', './assets/48x48.png');
+
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
       frameHeight: 16
@@ -54,9 +57,12 @@ class Play extends Phaser.Scene {
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
-    const tileset = map.addTilesetImage("tempTiles", "tileImage");
-    const wallLayer = map.createLayer("Walls", tileset, 0, 0);
-    const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+  //  const tileset = map.addTilesetImage("tempTiles", "tileImage");
+    const groundTileset = map.addTilesetImage("48x48box", "groundTile");
+    const smallTileset = map.addTilesetImage("48x48", "smallTile");
+
+    const wallLayer = map.createLayer("Walls", smallTileset, 0, 0);
+    const groundLayer = map.createLayer("Ground", [groundTileset, smallTileset], 0, 0);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
