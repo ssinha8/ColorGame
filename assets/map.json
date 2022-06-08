@@ -393,16 +393,16 @@
          "name":"EnemyAltar",
          "objects":[
                 {
-                 "gid":7,
+                 "gid":39,
                  "height":16,
-                 "id":35,
+                 "id":78,
                  "name":"enemyAltar",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":5584.83,
-                 "y":287.833
+                 "x":5552.25,
+                 "y":288.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -416,16 +416,16 @@
          "name":"WallAltar",
          "objects":[
                 {
-                 "gid":7,
+                 "gid":37,
                  "height":16,
-                 "id":31,
+                 "id":76,
                  "name":"wallAltar",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":288,
-                 "y":256
+                 "x":271.818181818182,
+                 "y":256.272727272727
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -439,22 +439,16 @@
          "name":"GravAltar",
          "objects":[
                 {
-                 "gid":7,
+                 "gid":38,
                  "height":16,
-                 "id":21,
+                 "id":77,
                  "name":"gravAltar",
-                 "properties":[
-                        {
-                         "name":"collides",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":3152.25,
-                 "y":1264
+                 "x":3136.25,
+                 "y":1264.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -468,16 +462,16 @@
          "name":"MomAltar",
          "objects":[
                 {
-                 "gid":7,
+                 "gid":40,
                  "height":16,
-                 "id":32,
+                 "id":79,
                  "name":"momAltar",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":240,
-                 "y":2688
+                 "x":80.1875,
+                 "y":2688.375
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -491,16 +485,16 @@
          "name":"SpringAltar",
          "objects":[
                 {
-                 "gid":7,
+                 "gid":41,
                  "height":16,
-                 "id":34,
+                 "id":80,
                  "name":"springAltar",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":5569.33,
-                 "y":2688
+                 "x":5552.27272727273,
+                 "y":2688.30303030303
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -903,7 +897,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":52,
+ "nextobjectid":81,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
@@ -913,7 +907,7 @@
          "columns":9,
          "firstgid":1,
          "image":"tempTiles.png",
-         "imageheight":64,
+         "imageheight":16,
          "imagewidth":144,
          "margin":0,
          "name":"tempTiles",
@@ -970,39 +964,103 @@
          "transparentcolor":"#ff00ff"
         }, 
         {
-         "columns":0,
+         "columns":1,
          "firstgid":37,
-         "grid":
-            {
-             "height":1,
-             "orientation":"orthogonal",
-             "width":1
-            },
+         "image":"wallpowerup.png",
+         "imageheight":64,
+         "imagewidth":64,
          "margin":0,
-         "name":"Respawn",
+         "name":"wallpowerup",
          "spacing":0,
-         "tilecount":2,
-         "tileheight":355,
+         "tilecount":1,
+         "tileheight":64,
          "tiles":[
                 {
                  "id":0,
-                 "image":"Respawn.png",
-                 "imageheight":355,
-                 "imagewidth":449,
                  "properties":[
                         {
                          "name":"collides",
                          "type":"bool",
                          "value":true
                         }]
-                }, 
-                {
-                 "id":1,
-                 "image":"RespawnActive.png",
-                 "imageheight":355,
-                 "imagewidth":449
                 }],
-         "tilewidth":449
+         "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":38,
+         "image":"Gravity.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Gravity",
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":39,
+         "image":"Enemypowerup.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Enemypowerup",
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":false
+                }],
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":40,
+         "image":"MomentumPowerup.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"MomentumPowerup",
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "columns":1,
+         "firstgid":41,
+         "image":"Springpowerup.png",
+         "imageheight":64,
+         "imagewidth":64,
+         "margin":0,
+         "name":"Springpowerup",
+         "properties":[
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }],
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":64,
+         "tilewidth":64
         }],
  "tilewidth":16,
  "type":"map",
