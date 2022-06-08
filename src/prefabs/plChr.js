@@ -5,9 +5,10 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         scene.physics.add.existing(this);
         this.momentumEnable = false;
         this.gravityEnable = false;
-        this.spikeEnable = false;
+      //  this.spikeEnable = false;
         this.wallsEnable = false;
         this.springEnable = false;
+        this.enemyEnable = false;
         this.FLATMOVESPEED = 400;
         this.JUMP_FORCE = 500;
         this.ACCELERATION = 1000;

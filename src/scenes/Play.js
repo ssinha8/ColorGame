@@ -259,7 +259,7 @@ class Play extends Phaser.Scene {
     });
 
     // Enemy collisions
-    this.physics.add.collider(this.player, this.enemy1, () => {
+    this.enemyCollider = this.physics.add.collider(this.player, this.enemy1, () => {
       if (this.activeRespawn == null) {
         this.player.setPosition(playerSpawn.x, playerSpawn.y);
 
@@ -267,9 +267,9 @@ class Play extends Phaser.Scene {
         this.player.setPosition(this.activeRespawn.x, this.activeRespawn.y);
       }
     });
+    this.enemyCollider.active = false;
 
-    this.physics.add.collider(this.enemy1, wallLayer);
-    
+    this.physics.add.collider(this.enemy1, wallLayer); 
     this.physics.add.collider(this.enemy1, groundLayer, () => {
 
     });
@@ -330,20 +330,17 @@ class Play extends Phaser.Scene {
         this.wallAltar[0].destroy();
         this.wallPowerup[0].destroy();
       }
-    //  console.log(respawn.x, respawn.y);
     });
 
     this.physics.add.overlap(this.player, this.enemyAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
 
       if (this.enemyAltar[0].active) {
-   //     this.player.gravityEnable = true;
-   //     this.player.wallsEnable = true;
-   //     this.wallCollider.active = true;
+        this.enemyCollider.active = true;
+        this.player.enemyEnable = true;
         this.enemyAltar[0].destroy();
         this.enemyPowerup[0].destroy();
       }
-   //   console.log(respawn.x, respawn.y);
     });
     
     this.physics.add.overlap(this.player, this.momAltarOn, (player, respawn) => {
@@ -354,7 +351,6 @@ class Play extends Phaser.Scene {
         this.momAltar[0].destroy();
         this.momentumPowerup[0].destroy();
       }
-  //    console.log(respawn.x, respawn.y);
     });
 
     this.physics.add.overlap(this.player, this.springAltarOn, (player, respawn) => {
@@ -366,7 +362,6 @@ class Play extends Phaser.Scene {
         this.springAltar[0].destroy();
         this.springPowerup[0].destroy();
       }
-   //   console.log(respawn.x, respawn.y);
     });
 
     this.cameras.main.startFollow(this.player);
@@ -374,6 +369,11 @@ class Play extends Phaser.Scene {
 
   
   update() {
+
+    if (this.player.momentumEnable && this.player.gravityEnable &&
+        this.player.wallsEnable && this.player.enemyEnable && this.player.springEnable) {
+          this.scene.start('endScene');
+        }
 
     if (Phaser.Input.Keyboard.JustDown(this.keyP)) {
       this.scene.launch('pauseScene');

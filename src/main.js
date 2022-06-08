@@ -13,7 +13,7 @@ let config = {
             debug: true
         }
     },
-    scene: [Menu, Pause, Play]
+    scene: [Menu, Pause, Play, End]
 }
 
 let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyCONFIRM, keyJUMP, keyCANCEL, keyPAUSE, keySPACE, keyDEBUG1, keyDEBUG2, keyDEBUG3, keyDEBUG4, keyDEBUG5;
