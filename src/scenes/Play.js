@@ -7,7 +7,6 @@ class Play extends Phaser.Scene {
   preload() {
     this.load.image('smoke', './assets/wisp4.png');
     this.load.image('tileImage', './assets/tempTiles.png');
-    this.load.image('tileImage2', './assets/48x48box.png');
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
       frameHeight: 16
@@ -56,9 +55,8 @@ class Play extends Phaser.Scene {
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
-    const tileset2 = map.addTilesetImage("ground", "tileImage2");
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
-    const groundLayer = map.createLayer("Ground", tileset2, 0, 0);
+    const groundLayer = map.createLayer("Ground", tileset, 0, 0);
  //   const respawnNotActive = map.createLayer("Respawn", tileset, 0, 0);
  //   const test = map.cre
 
@@ -86,7 +84,7 @@ class Play extends Phaser.Scene {
     this.springs = map.createFromObjects("Spring", {
       name: "spring",
       key: "kenney_sheet",
-      frame: 6
+      frame: 8
     });
 
     this.gravAltar = map.createFromObjects("GravAltar", {
