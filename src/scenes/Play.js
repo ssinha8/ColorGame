@@ -5,10 +5,6 @@ class Play extends Phaser.Scene {
 
   // Eventually load sprites and spritesheets (animation)
   preload() {
-    this.load.image('placeholder', './assets/placeholder.png');
-    this.load.image('gravity', './assets/gravity.png');
-    this.load.image('wallPowerup', './assets/wallPowerup.png');
-    this.load.image('wall', './assets/wall.png');
     this.load.image('smoke', './assets/wisp4.png');
     this.load.image('tileImage', './assets/tempTiles.png');
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
