@@ -286,6 +286,25 @@ class Play extends Phaser.Scene {
     });
 
     this.anims.create({
+      key: 'jump_up',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 5},
+      ],
+    //  frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'jump_down',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 6},
+      ],
+      repeat: -1
+    });
+
+    this.anims.create({
       key: 'turn_left',
       defaultTextureKey: 'playerAnims',
       frames: [
@@ -295,7 +314,6 @@ class Play extends Phaser.Scene {
         {frame: 1},
         {frame: 0},
       ],
-    //  repeat: 1
     });
 
     this.anims.create({
@@ -308,7 +326,6 @@ class Play extends Phaser.Scene {
         {frame: 3},
         {frame: 4},
       ],
-    //  repeat: 1
     });
 
     this.player.anims.play('jump_idle');
@@ -323,7 +340,6 @@ class Play extends Phaser.Scene {
         {frame: 2},
         {frame: 3},
       ],
-      repeat: 1
     });
 
     // Colliders:
@@ -472,10 +488,19 @@ class Play extends Phaser.Scene {
 
       }
       this.player.play('walk_right', true);
+    
     }
 
-    if (this.player.body.velocity.x == 0) {
+    if (this.player.body.velocity.x == 0 && this.player.body.velocity.y == 0) {
       this.player.play('jump_idle', true);
+    
+    } else if (this.player.body.velocity.x == 0) {
+      if (this.player.body.velocity.y > 0) {
+        this.player.play('jump_down', true);
+
+      } else {
+        this.player.play('jump_up', true);
+      }
     }
 
     this.enemy1.update();
