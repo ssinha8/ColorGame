@@ -23,6 +23,7 @@ class Play extends Phaser.Scene {
   create() {
 
     this.cameras.main.setBounds(0, 0, 960 * 6, 544 * 5);
+    this.activeRespawn;
 
     this.launchSpeed = -530;
 
@@ -31,6 +32,7 @@ class Play extends Phaser.Scene {
     const tileset = map.addTilesetImage("tempTiles", "tileImage");
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
+ //   const respawnNotActive = map.createLayer("Respawn", tileset, 0, 0);
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
@@ -41,6 +43,12 @@ class Play extends Phaser.Scene {
       collides: true 
     });
 
+  /*  respawnNotActive.setCollisionByProperty({
+      collides: true
+    });
+
+    respawnNotActive.setDepth(1);
+*/
     this.spikes = map.createFromObjects("Spike", {
       name: "spike",
       key: "kenney_sheet",
@@ -51,7 +59,11 @@ class Play extends Phaser.Scene {
       name: "spring",
       key: "kenney_sheet",
       frame: 8
-    })
+    });
+
+    this.respawnNotActive = map.createFromObjects("Respawn", {
+      name: "respawn",
+    });
 
     this.altars = map.createFromObjects("Altar", {
       name: "altar",
@@ -144,6 +156,12 @@ class Play extends Phaser.Scene {
     });
     this.springCollider.active = this.player.springEnable;
     //this.springGroup.setAlpha(0);
+
+    // Respawn collider
+ /*   this.physics.add.collider(this.player, respawnNotActive, (player, respawn) => {
+      this.activeRespawn = respawn;
+      console.log(respawn);
+    })*/
 
     this.cameras.main.startFollow(this.player);
   }
