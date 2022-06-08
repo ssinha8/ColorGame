@@ -15,7 +15,7 @@ class Play extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.tilemapTiledJSON("platform_map", "./assets/tempMap.json");    // Tiled JSON file
+    this.load.tilemapTiledJSON("platform_map", "./assets/map.json");    // Tiled JSON file
 
   }
 
@@ -53,11 +53,19 @@ class Play extends Phaser.Scene {
       frame: 8
     })
 
+    this.altars = map.createFromObjects("Altar", {
+      name: "altar",
+      key: "kenney_sheet",
+      frame: 6
+    })
+
     this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.springs, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.altars, Phaser.Physics.Arcade.STATIC_BODY);
 
     this.spikeGroup = this.add.group(this.spikes);
     this.springGroup = this.add.group(this.springs);
+    this.altarGroup = this.add.group(this.altars);
 
     
     // Boolean checks for game mechanics
