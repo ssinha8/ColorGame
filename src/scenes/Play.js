@@ -18,6 +18,11 @@ class Play extends Phaser.Scene {
       frameHeight: 1280
     });
 
+    this.load.spritesheet("spikes", "./assets/spikes.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
+
     this.load.spritesheet("playerAnims", "./assets/TurnArounds.png", {
       frameWidth: 48,
       frameHeight: 64
@@ -99,7 +104,7 @@ class Play extends Phaser.Scene {
 
     this.spikes = map.createFromObjects("Spike", {
       name: "spike",
-      key: "kenney_sheet3",
+      key: "spikes",
       frame: 0
     });
 
@@ -389,8 +394,8 @@ class Play extends Phaser.Scene {
 
     // Spike collider
     this.spikeCollider = this.physics.add.collider(this.player, this.spikeGroup, () => {
+      
       if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
-        console.log("hit bottom");
         if (this.activeRespawn == null) {
           this.player.setPosition(playerSpawn.x, playerSpawn.y);
 
@@ -399,7 +404,6 @@ class Play extends Phaser.Scene {
         }
       }
     });
-    this.spikeCollider.active = this.player.spikeEnable;
 
     // Spring Collider
     this.springCollider = this.physics.add.collider(this.player, this.springGroup, (player, spring) => {
