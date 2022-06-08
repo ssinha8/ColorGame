@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="51">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="52">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
- <tileset firstgid="1" name="tempTiles" tilewidth="16" tileheight="16" tilecount="9" columns="9">
-  <image source="tempTiles.png" trans="ff00ff" width="144" height="16"/>
+ <tileset firstgid="1" name="tempTiles" tilewidth="16" tileheight="16" tilecount="36" columns="9">
+  <image source="tempTiles.png" trans="ff00ff" width="144" height="64"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -29,6 +29,18 @@
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="37" name="Respawn" tilewidth="449" tileheight="355" tilecount="2" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+   <image width="449" height="355" source="Respawn.png"/>
+  </tile>
+  <tile id="1">
+   <image width="449" height="355" source="RespawnActive.png"/>
   </tile>
  </tileset>
  <layer id="1" name="Ground" width="360" height="170">
@@ -382,6 +394,12 @@
  <objectgroup id="4" name="Spike">
   <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
  </objectgroup>
+ <objectgroup id="11" name="EnemyAltar">
+  <object id="35" name="enemyAltar" gid="7" x="5584.83" y="287.833" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="8" name="WallAltar">
+  <object id="31" name="wallAltar" gid="7" x="288" y="256" width="16" height="16"/>
+ </objectgroup>
  <objectgroup id="7" name="GravAltar">
   <object id="21" name="gravAltar" gid="7" x="3152.25" y="1264" width="16" height="16">
    <properties>
@@ -389,22 +407,11 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="WallAltar">
-  <object id="31" name="wallAltar" gid="7" x="288" y="256" width="16" height="16"/>
- </objectgroup>
  <objectgroup id="9" name="MomAltar">
   <object id="32" name="momAltar" gid="7" x="240" y="2688" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="10" name="SpringAltar">
   <object id="34" name="springAltar" gid="7" x="5569.33" y="2688" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="11" name="EnemyAltar">
-  <object id="35" name="enemyAltar" gid="7" x="5584.83" y="287.833" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="6" name="PlayerSpawn">
-  <object id="18" name="player spawn" x="3103.64" y="1259.64">
-   <point/>
-  </object>
  </objectgroup>
  <objectgroup id="5" name="Spring">
   <object id="9" name="spring" gid="9" x="5407.83" y="2079.83" width="16" height="16"/>
@@ -437,5 +444,10 @@
   <object id="48" name="spring" gid="9" x="2880.5" y="896.333" width="16" height="16"/>
   <object id="49" name="spring" gid="9" x="3040" y="753" width="16" height="16"/>
   <object id="50" name="spring" gid="9" x="2655.33" y="528.667" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="6" name="PlayerSpawn">
+  <object id="18" name="player spawn" x="3103.64" y="1259.64">
+   <point/>
+  </object>
  </objectgroup>
 </map>
