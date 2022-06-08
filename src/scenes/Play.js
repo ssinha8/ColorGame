@@ -5,16 +5,13 @@ class Play extends Phaser.Scene {
 
   // Eventually load sprites and spritesheets (animation)
   preload() {
-    this.load.image('placeholder', './assets/placeholder.png');
-    this.load.image('gravity', './assets/gravity.png');
-    this.load.image('wallPowerup', './assets/wallPowerup.png');
-    this.load.image('wall', './assets/wall.png');
     this.load.image('smoke', './assets/wisp4.png');
     this.load.image('tileImage', './assets/tempTiles.png');
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
       frameHeight: 16
     });
+    this.load.spritesheet("test1", "./assets/Respawn.tsx");
     this.load.tilemapTiledJSON("platform_map", "./assets/map.json");    // Tiled JSON file
 
   }
@@ -23,9 +20,10 @@ class Play extends Phaser.Scene {
   create() {
 
     this.cameras.main.setBounds(0, 0, 960 * 6, 544 * 5);
-    this.activeRespawn;
+    this.activeRespawn = null;
+    this.altars = this.add.container();
 
-    this.launchSpeed = -530;
+    this.launchSpeed = -800;
 
     const map = this.add.tilemap("platform_map");
     // add a tileset to the map
@@ -33,6 +31,7 @@ class Play extends Phaser.Scene {
     const wallLayer = map.createLayer("Walls", tileset, 0, 0);
     const groundLayer = map.createLayer("Ground", tileset, 0, 0);
  //   const respawnNotActive = map.createLayer("Respawn", tileset, 0, 0);
+ //   const test = map.cre
 
     wallLayer.setCollisionByProperty({ 
       collides: true 
@@ -61,23 +60,58 @@ class Play extends Phaser.Scene {
       frame: 8
     });
 
-    this.respawnNotActive = map.createFromObjects("Respawn", {
-      name: "respawn",
-    });
-
-    this.altars = map.createFromObjects("Altar", {
-      name: "altar",
+    this.gravAltar = map.createFromObjects("GravAltar", {
+      name: "gravAltar",
       key: "kenney_sheet",
       frame: 6
-    })
+    });
+
+    this.wallAltar = map.createFromObjects("WallAltar", {
+      name: "wallAltar",
+      key: "kenney_sheet",
+      frame: 6
+    });
+
+    this.enemyAltar = map.createFromObjects("EnemyAltar", {
+      name: "enemyAltar",
+      key: "kenney_sheet",
+      frame: 6
+    });
+
+    this.momAltar = map.createFromObjects("MomAltar", {
+      name: "momAltar",
+      key: "kenney_sheet",
+      frame: 6
+    });
+
+    this.springAltar = map.createFromObjects("SpringAltar", {
+      name: "springAltar",
+      key: "kenney_sheet",
+      frame: 6
+    });
+ /*   this.respawnNotActive = map.createFromObjects("EnemyAltar", {
+      name: "test",
+      key: "test1",
+    //  frame: 1
+    });
+*/
+ /*   this.altars = map.getObjectLayer("Respawn");
+    this.altars.objects.forEach(object => { 
+      console.log(object);
+    */
 
     this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.springs, Phaser.Physics.Arcade.STATIC_BODY);
-    this.physics.world.enable(this.altars, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.gravAltar, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.wallAltar, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.enemyAltar, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.momAltar, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.springAltar, Phaser.Physics.Arcade.STATIC_BODY);
 
     this.spikeGroup = this.add.group(this.spikes);
     this.springGroup = this.add.group(this.springs);
-    this.altarGroup = this.add.group(this.altars);
+ //   this.altars.add(this.gravAltar);
+  //  this.altars.add(this.wallAltar);
 
     
     // Boolean checks for game mechanics
@@ -143,6 +177,12 @@ class Play extends Phaser.Scene {
     this.spikeCollider = this.physics.add.collider(this.player, this.spikeGroup, () => {
       if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
         console.log("hit bottom");
+        if (this.activeRespawn == null) {
+          this.player.setPosition(playerSpawn.x, playerSpawn.y);
+
+        } else {
+          this.player.setPosition(this.activeRespawn.x, this.activeRespawn.y);
+        }
       }
     });
     this.spikeCollider.active = this.player.spikeEnable;
@@ -157,11 +197,31 @@ class Play extends Phaser.Scene {
     this.springCollider.active = this.player.springEnable;
     //this.springGroup.setAlpha(0);
 
-    // Respawn collider
- /*   this.physics.add.collider(this.player, respawnNotActive, (player, respawn) => {
+    // Respawn colliders
+    this.physics.add.overlap(this.player, this.gravAltar, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn);
-    })*/
+      console.log(respawn.x, respawn.y);
+    });
+
+    this.physics.add.overlap(this.player, this.wallAltar, (player, respawn) => {
+      this.activeRespawn = respawn;
+      console.log(respawn.x, respawn.y);
+    });
+
+    this.physics.add.overlap(this.player, this.enemyAltar, (player, respawn) => {
+      this.activeRespawn = respawn;
+      console.log(respawn.x, respawn.y);
+    });
+    
+    this.physics.add.overlap(this.player, this.momAltar, (player, respawn) => {
+      this.activeRespawn = respawn;
+      console.log(respawn.x, respawn.y);
+    });
+
+    this.physics.add.overlap(this.player, this.springAltar, (player, respawn) => {
+      this.activeRespawn = respawn;
+      console.log(respawn.x, respawn.y);
+    });
 
     this.cameras.main.startFollow(this.player);
   }
