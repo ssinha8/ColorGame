@@ -30,75 +30,6 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="9">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="19">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="20">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="21">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="27">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="30">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="37" name="Respawn" tilewidth="449" tileheight="355" tilecount="2" columns="0">
-  <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
-   <image width="449" height="355" source="Respawn.png"/>
-  </tile>
-  <tile id="1">
-   <image width="449" height="355" source="RespawnActive.png"/>
-  </tile>
  </tileset>
  <layer id="1" name="Ground" width="360" height="170">
   <data encoding="csv">
@@ -448,14 +379,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="10" name="Respawn">
-  <object id="34" name="respawn" gid="37" x="142.833" y="256.833" width="67.35" height="53.25"/>
- </objectgroup>
- <objectgroup id="4" name="Spike">
-  <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="6" name="PlayerSpawn">
-  <object id="18" name="player spawn" x="214" y="200">
  <objectgroup id="4" name="Spike">
   <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
  </objectgroup>
