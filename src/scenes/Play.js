@@ -140,6 +140,9 @@ class Play extends Phaser.Scene {
     this.player.body.setAllowGravity(false);
     this.player.setDepth(3);
 
+
+    this.enemy1 = new enemy(this, 650, 200, 'kenney_sheet', 4, 1, 3);
+
     this.particles = this.add.particles('smoke');
     console.log(this.particles);
 
@@ -163,6 +166,10 @@ class Play extends Phaser.Scene {
       //  console.log(this.player.body.onWall());
         this.player.touchGroundWall = true;
       }
+    });
+    
+    this.physics.add.collider(this.enemy1, groundLayer, () => {
+
     });
 
     this.wallCollider = this.physics.add.collider(this.player, wallLayer, () => {
@@ -237,6 +244,7 @@ class Play extends Phaser.Scene {
   //  console.log(this.player.body.angle);
 
     this.player.update();
+    this.enemy1.update();
 
   //  if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
  //     this.player.wallsEnable = !this.wallsEnable;
