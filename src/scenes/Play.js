@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
     this.load.image('tileImage', './assets/tempTiles.png');
     this.load.image('groundTile', './assets/48x48box.png');
     this.load.image('smallTile', './assets/48x48.png');
+    this.load.image('springTile', './assets/SpringFrames.png');
 
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
@@ -17,6 +18,10 @@ class Play extends Phaser.Scene {
     this.load.spritesheet("kenney_sheet2", "./assets/48x48box.png", {
       frameWidth: 16,
       frameHeight: 16
+    });
+    this.load.spritesheet("kenney_sheet3", "./assets/SpringFrames.png", {
+      frameWidth: 48,
+      frameHeight: 48
     });
     this.load.spritesheet("wall_sheet", "./assets/wallpowerup.png", {
       frameWidth: 32,
@@ -75,8 +80,8 @@ class Play extends Phaser.Scene {
 
     this.spikes = map.createFromObjects("Spike", {
       name: "spike",
-      key: "kenney_sheet",
-      frame: 7
+      key: "kenney_sheet3",
+      frame: 0
     });
 
     this.springs = map.createFromObjects("Spring", {
