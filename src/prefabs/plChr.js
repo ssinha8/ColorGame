@@ -9,7 +9,7 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
         this.wallsEnable = false;
         this.springEnable = false;
         this.FLATMOVESPEED = 400;
-        this.JUMP_FORCE = 400;
+        this.JUMP_FORCE = 500;
         this.ACCELERATION = 1000;
         this.TURNAROUNDACCEL_GROUND = 1400;
         this.TURNAROUNDACCEL_AIR = 800;
@@ -101,7 +101,13 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
             this.body.setAllowDrag(false);
         }
         if (this.gravityEnable){
-            this.setAccelerationY(800)
+            if(keyJUMP.isDown){
+                this.setAccelerationY(1000)
+                this.body.setMaxVelocityY(800);
+            }else{
+                this.setAccelerationY(1750);
+                this.body.setMaxVelocityY(1000);
+            }
         }
         else{
             this.setAccelerationY(0);
@@ -113,13 +119,13 @@ class plChr extends Phaser.Physics.Arcade.Sprite{
             if (this.body.onFloor()) {
                 this.setVelocityY(-this.JUMP_FORCE);
 
-            } else if (this.body.blocked.right && !this.touchGroundWall) {
+            } else if (this.body.blocked.right && !this.body.blocked.down) {
                 this.setVelocityX (-this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if(!this.momentumEnable){
                     this.rightLock = this.lockoutTime;
                 }
-            } else if (this.body.blocked.left && !this.touchGroundWall) {
+            } else if (this.body.blocked.left && !this.body.blocked.down) {
                 this.setVelocityX (this.FLATMOVESPEED);
                 this.setVelocityY(-this.JUMP_FORCE);
                 if (!this.momentumEnable){
