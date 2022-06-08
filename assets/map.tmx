@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="94">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="99">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
@@ -410,21 +410,36 @@
  <objectgroup id="4" name="Spike">
   <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
  </objectgroup>
+ <objectgroup id="13" name="EnemyOn">
+  <object id="94" name="enemyOn" gid="38" x="5510.48" y="288.242" width="67.35" height="53.25"/>
+ </objectgroup>
  <objectgroup id="11" name="EnemyAltar">
-  <object id="92" name="enemyAltar" gid="37" x="5510.75" y="288.5" width="67.35" height="53.25"/>
+  <object id="92" name="enemyAltar" gid="37" x="5510.75" y="288.136" width="67.35" height="53.25"/>
   <object id="93" name="enemyPowerup" gid="43" x="5528.25" y="267.25" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="14" name="WallOn">
+  <object id="95" name="wallOn" gid="38" x="247.5" y="256.061" width="67.35" height="53.25"/>
  </objectgroup>
  <objectgroup id="8" name="WallAltar">
   <object id="88" name="wallAltar" gid="37" x="247.517" y="256.125" width="67.35" height="53.25"/>
   <object id="89" name="wallPowerup" gid="42" x="264.909" y="234.909" width="32" height="32"/>
  </objectgroup>
+ <objectgroup id="16" name="GravOn">
+  <object id="97" name="gravOn" gid="38" x="3125.88" y="1264.05" width="67.35" height="53.25"/>
+ </objectgroup>
  <objectgroup id="7" name="GravAltar">
   <object id="82" name="gravAltar" gid="37" x="3126.21" y="1264.58" width="67.35" height="53.25"/>
   <object id="83" name="gravPowerup" gid="39" x="3143.36" y="1243" width="32" height="32"/>
  </objectgroup>
+ <objectgroup id="15" name="MomOn">
+  <object id="96" name="momOn" gid="38" x="53.5758" y="2688.18" width="67.35" height="53.25"/>
+ </objectgroup>
  <objectgroup id="9" name="MomAltar">
   <object id="86" name="momAltar" gid="37" x="53.7386" y="2688.16" width="67.35" height="53.25"/>
   <object id="87" name="momPowerup" gid="41" x="71.3636" y="2666.73" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="17" name="SpringOn">
+  <object id="98" name="springOn" gid="38" x="5525.67" y="2688.33" width="67.35" height="53.25"/>
  </objectgroup>
  <objectgroup id="10" name="SpringAltar">
   <object id="84" name="springAltar" gid="37" x="5525.89" y="2688.58" width="67.35" height="53.25"/>

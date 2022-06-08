@@ -89,10 +89,22 @@ class Play extends Phaser.Scene {
       frame: 0
     });
 
+    this.gravAltarOn = map.createFromObjects("GravOn", {
+      name: "gravOn",
+      key: "altars",
+      frame: 1
+    });
+
     this.wallAltar = map.createFromObjects("WallAltar", {
       name: "wallAltar",
       key: "altars",
       frame: 0
+    });
+
+    this.wallAltarOn = map.createFromObjects("WallOn", {
+      name: "wallOn",
+      key: "altars",
+      frame: 1
     });
 
     this.enemyAltar = map.createFromObjects("EnemyAltar", {
@@ -101,16 +113,34 @@ class Play extends Phaser.Scene {
       frame: 0
     });
 
+    this.enemyAltarOn = map.createFromObjects("EnemyOn", {
+      name: "enemyOn",
+      key: "altars",
+      frame: 1
+    });
+
     this.momAltar = map.createFromObjects("MomAltar", {
       name: "momAltar",
       key: "altars",
       frame: 0
     });
 
+    this.momAltarOn = map.createFromObjects("MomOn", {
+      name: "momOn",
+      key: "altars",
+      frame: 1
+    });
+
     this.springAltar = map.createFromObjects("SpringAltar", {
       name: "springAltar",
       key: "altars",
       frame: 0
+    });
+
+    this.springAltarOn = map.createFromObjects("SpringOn", {
+      name: "springOn",
+      key: "altars",
+      frame: 1
     });
 
     this.gravPowerup = map.createFromObjects("GravAltar", {
@@ -155,6 +185,12 @@ class Play extends Phaser.Scene {
 
     this.physics.world.enable(this.spikes, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.springs, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.gravAltarOn, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.wallAltarOn, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.enemyAltarOn, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.momAltarOn, Phaser.Physics.Arcade.STATIC_BODY);
+    this.physics.world.enable(this.springAltarOn, Phaser.Physics.Arcade.STATIC_BODY);
+
     this.physics.world.enable(this.gravAltar, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.wallAltar, Phaser.Physics.Arcade.STATIC_BODY);
     this.physics.world.enable(this.enemyAltar, Phaser.Physics.Arcade.STATIC_BODY);
@@ -164,22 +200,6 @@ class Play extends Phaser.Scene {
     this.spikeGroup = this.add.group(this.spikes);
     this.springGroup = this.add.group(this.springs);
 
-  /*  console.log(this.springAltar);
-    console.log(this.springAltar);
-    console.log(this.springAltar);
-    console.log(this.springAltar);
-    console.log(this.springAltar);
-
-    this.springAltarGroup = this.group.add(this.springAltar);
-    this.gravAltarGroup = this.group.add(this.gravAltar);
-    this.enemyAltar = this.group.add(this.enemyAltar);
-    this.wallAltar = this.group.add(this.wallAltar);
-    this.momAltarGroup = this.group.add(this.momAltar);*/
-
- //   this.altars.add(this.gravAltar);
-  //  this.altars.add(this.wallAltar);
-
-    
     // Boolean checks for game mechanics
     this.playerGravity = false;
     this.particleOn = false;
@@ -282,30 +302,67 @@ class Play extends Phaser.Scene {
     this.springCollider.active = this.player.springEnable;
     //this.springGroup.setAlpha(0);
 
+
     // Respawn colliders
-    this.physics.add.overlap(this.player, this.gravAltar, (player, respawn) => {
+    this.physics.add.overlap(this.player, this.gravAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn.x, respawn.y);
+    //  console.log(this.gravAltar[0]);
+
+      if (this.gravAltar[0].active) {
+     //   console.log(this.gravAltar[0].active);
+        this.player.gravityEnable = true;
+        this.gravAltar[0].destroy();
+        this.gravPowerup[0].destroy();
+      }
     });
 
-    this.physics.add.overlap(this.player, this.wallAltar, (player, respawn) => {
+    this.physics.add.overlap(this.player, this.wallAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn.x, respawn.y);
+
+      if (this.wallAltar[0].active) {
+        this.player.gravityEnable = true;
+        this.player.wallsEnable = true;
+        this.wallCollider.active = true;
+        this.wallAltar[0].destroy();
+        this.wallPowerup[0].destroy();
+      }
+    //  console.log(respawn.x, respawn.y);
     });
 
-    this.physics.add.overlap(this.player, this.enemyAltar, (player, respawn) => {
+    this.physics.add.overlap(this.player, this.enemyAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn.x, respawn.y);
+
+      if (this.enemyAltar[0].active) {
+   //     this.player.gravityEnable = true;
+   //     this.player.wallsEnable = true;
+   //     this.wallCollider.active = true;
+        this.enemyAltar[0].destroy();
+        this.enemyPowerup[0].destroy();
+      }
+   //   console.log(respawn.x, respawn.y);
     });
     
-    this.physics.add.overlap(this.player, this.momAltar, (player, respawn) => {
+    this.physics.add.overlap(this.player, this.momAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn.x, respawn.y);
+
+      if (this.momAltar[0].active) {
+        this.player.momentumEnable = true;
+        this.momAltar[0].destroy();
+        this.momentumPowerup[0].destroy();
+      }
+  //    console.log(respawn.x, respawn.y);
     });
 
-    this.physics.add.overlap(this.player, this.springAltar, (player, respawn) => {
+    this.physics.add.overlap(this.player, this.springAltarOn, (player, respawn) => {
       this.activeRespawn = respawn;
-      console.log(respawn.x, respawn.y);
+
+      if (this.springAltar[0].active) {
+        this.player.springEnable = true;
+        this.springCollider.active = true;
+        this.springAltar[0].destroy();
+        this.springPowerup[0].destroy();
+      }
+   //   console.log(respawn.x, respawn.y);
     });
 
     this.cameras.main.startFollow(this.player);
@@ -323,11 +380,6 @@ class Play extends Phaser.Scene {
 
     this.player.update();
     this.enemy1.update();
-
-  //  if(Phaser.Input.Keyboard.JustDown(keyDEBUG2)){
- //     this.player.wallsEnable = !this.wallsEnable;
-      this.wallCollider.active = this.player.wallsEnable; 
- //   }
 
      if (Phaser.Input.Keyboard.JustDown(keyDEBUG4)) {
       this.player.spikeEnable = !this.player.spikeEnable;

@@ -389,6 +389,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":13,
+         "name":"EnemyOn",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":53.25,
+                 "id":94,
+                 "name":"enemyOn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.35,
+                 "x":5510.48484848485,
+                 "y":288.242424242424
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":11,
          "name":"EnemyAltar",
          "objects":[
@@ -402,7 +425,7 @@
                  "visible":true,
                  "width":67.35,
                  "x":5510.75,
-                 "y":288.5
+                 "y":288.136363636364
                 }, 
                 {
                  "gid":43,
@@ -415,6 +438,29 @@
                  "width":32,
                  "x":5528.25,
                  "y":267.25
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":14,
+         "name":"WallOn",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":53.25,
+                 "id":95,
+                 "name":"wallOn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.35,
+                 "x":247.5,
+                 "y":256.060606060606
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -459,6 +505,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":16,
+         "name":"GravOn",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":53.25,
+                 "id":97,
+                 "name":"gravOn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.35,
+                 "x":3125.87878787879,
+                 "y":1264.04545454545
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":7,
          "name":"GravAltar",
          "objects":[
@@ -494,6 +563,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":15,
+         "name":"MomOn",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":53.25,
+                 "id":96,
+                 "name":"momOn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.35,
+                 "x":53.5757575757576,
+                 "y":2688.18181818182
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":9,
          "name":"MomAltar",
          "objects":[
@@ -520,6 +612,29 @@
                  "width":32,
                  "x":71.3636363636364,
                  "y":2666.72727272727
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":17,
+         "name":"SpringOn",
+         "objects":[
+                {
+                 "gid":38,
+                 "height":53.25,
+                 "id":98,
+                 "name":"springOn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.35,
+                 "x":5525.66666666667,
+                 "y":2688.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -956,8 +1071,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":94,
+ "nextlayerid":18,
+ "nextobjectid":99,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.5",
