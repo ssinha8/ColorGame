@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="52">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="81">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="tempTiles" tilewidth="16" tileheight="16" tilecount="36" columns="9">
-  <image source="tempTiles.png" trans="ff00ff" width="144" height="64"/>
+  <image source="tempTiles.png" trans="ff00ff" width="144" height="16"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -31,17 +31,37 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="37" name="Respawn" tilewidth="449" tileheight="355" tilecount="2" columns="0">
-  <grid orientation="orthogonal" width="1" height="1"/>
+ <tileset firstgid="37" name="wallpowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="wallpowerup.png" width="64" height="64"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
-   <image width="449" height="355" source="Respawn.png"/>
   </tile>
-  <tile id="1">
-   <image width="449" height="355" source="RespawnActive.png"/>
-  </tile>
+ </tileset>
+ <tileset firstgid="38" name="Gravity" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <properties>
+   <property name="collides" type="bool" value="true"/>
+  </properties>
+  <image source="Gravity.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="39" name="Enemypowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <properties>
+   <property name="collides" type="bool" value="false"/>
+  </properties>
+  <image source="Enemypowerup.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="40" name="MomentumPowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <properties>
+   <property name="collides" type="bool" value="true"/>
+  </properties>
+  <image source="MomentumPowerup.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="41" name="Springpowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <properties>
+   <property name="collides" type="bool" value="true"/>
+  </properties>
+  <image source="Springpowerup.png" width="64" height="64"/>
  </tileset>
  <layer id="1" name="Ground" width="360" height="170">
   <data encoding="csv">
@@ -395,23 +415,19 @@
   <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="11" name="EnemyAltar">
-  <object id="35" name="enemyAltar" gid="7" x="5584.83" y="287.833" width="16" height="16"/>
+  <object id="78" name="enemyAltar" gid="39" x="5552.25" y="288.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="WallAltar">
-  <object id="31" name="wallAltar" gid="7" x="288" y="256" width="16" height="16"/>
+  <object id="76" name="wallAltar" gid="37" x="271.818" y="256.273" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="GravAltar">
-  <object id="21" name="gravAltar" gid="7" x="3152.25" y="1264" width="16" height="16">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="77" name="gravAltar" gid="38" x="3136.25" y="1264.25" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="9" name="MomAltar">
-  <object id="32" name="momAltar" gid="7" x="240" y="2688" width="16" height="16"/>
+  <object id="79" name="momAltar" gid="40" x="80.1875" y="2688.38" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="10" name="SpringAltar">
-  <object id="34" name="springAltar" gid="7" x="5569.33" y="2688" width="16" height="16"/>
+  <object id="80" name="springAltar" gid="41" x="5552.27" y="2688.3" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Spring">
   <object id="9" name="spring" gid="9" x="5407.83" y="2079.83" width="16" height="16"/>

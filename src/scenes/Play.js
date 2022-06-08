@@ -11,7 +11,26 @@ class Play extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.spritesheet("test1", "./assets/Respawn.tsx");
+    this.load.spritesheet("wall_sheet", "./assets/wallpowerup.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
+    this.load.spritesheet("spring_sheet", "./assets/Springpowerup.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
+    this.load.spritesheet("gravity_sheet", "./assets/Gravity.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
+    this.load.spritesheet("enemy_sheet", "./assets/Enemypowerup.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
+    this.load.spritesheet("mom_sheet", "./assets/MomentumPowerup.png", {
+      frameWidth: 64,
+      frameHeight: 64
+    });
     this.load.tilemapTiledJSON("platform_map", "./assets/map.json");    // Tiled JSON file
 
   }
@@ -57,37 +76,37 @@ class Play extends Phaser.Scene {
     this.springs = map.createFromObjects("Spring", {
       name: "spring",
       key: "kenney_sheet",
-      frame: 8
+      frame: 6
     });
 
     this.gravAltar = map.createFromObjects("GravAltar", {
       name: "gravAltar",
-      key: "kenney_sheet",
-      frame: 6
+      key: "gravity_sheet",
+      frame: 0
     });
 
     this.wallAltar = map.createFromObjects("WallAltar", {
       name: "wallAltar",
-      key: "kenney_sheet",
-      frame: 6
+      key: "wall_sheet",
+      frame: 0
     });
 
     this.enemyAltar = map.createFromObjects("EnemyAltar", {
       name: "enemyAltar",
-      key: "kenney_sheet",
-      frame: 6
+      key: "enemy_sheet",
+      frame: 0
     });
 
     this.momAltar = map.createFromObjects("MomAltar", {
       name: "momAltar",
-      key: "kenney_sheet",
-      frame: 6
+      key: "mom_sheet",
+      frame: 0
     });
 
     this.springAltar = map.createFromObjects("SpringAltar", {
       name: "springAltar",
-      key: "kenney_sheet",
-      frame: 6
+      key: "spring_sheet",
+      frame: 0
     });
  /*   this.respawnNotActive = map.createFromObjects("EnemyAltar", {
       name: "test",
@@ -110,6 +129,19 @@ class Play extends Phaser.Scene {
 
     this.spikeGroup = this.add.group(this.spikes);
     this.springGroup = this.add.group(this.springs);
+
+  /*  console.log(this.springAltar);
+    console.log(this.springAltar);
+    console.log(this.springAltar);
+    console.log(this.springAltar);
+    console.log(this.springAltar);
+
+    this.springAltarGroup = this.group.add(this.springAltar);
+    this.gravAltarGroup = this.group.add(this.gravAltar);
+    this.enemyAltar = this.group.add(this.enemyAltar);
+    this.wallAltar = this.group.add(this.wallAltar);
+    this.momAltarGroup = this.group.add(this.momAltar);*/
+
  //   this.altars.add(this.gravAltar);
   //  this.altars.add(this.wallAltar);
 
