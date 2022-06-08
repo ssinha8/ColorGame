@@ -10,6 +10,12 @@ class Play extends Phaser.Scene {
     this.load.image('groundTile', './assets/48x48box.png');
     this.load.image('smallTile', './assets/48x48.png');
     this.load.image('springTile', './assets/SpringFrames.png');
+    this.load.image('playerTiles', './assets/TurnArounds.png');
+
+    this.load.spritesheet("playerAnims", "./assets/TurnArounds.png", {
+      frameWidth: 48,
+      frameHeight: 64
+    });
 
     this.load.spritesheet("kenney_sheet", "./assets/tempTiles.png", {
       frameWidth: 16,
@@ -86,8 +92,8 @@ class Play extends Phaser.Scene {
 
     this.springs = map.createFromObjects("Spring", {
       name: "spring",
-      key: "kenney_sheet",
-      frame: 8
+      key: "kenney_sheet3",
+      frame: 0
     });
 
     this.gravAltar = map.createFromObjects("GravAltar", {
@@ -217,9 +223,11 @@ class Play extends Phaser.Scene {
     this.keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
 
+
+
     //Add gameplay objects
     const playerSpawn = map.findObject("PlayerSpawn", obj => obj.name === "player spawn");
-    this.player = new plChr(this, playerSpawn.x, playerSpawn.y, "kenney_sheet", 4);
+    this.player = new plChr(this, playerSpawn.x, playerSpawn.y, "playerAnims", 2);
     this.player.body.setAllowGravity(false);
     this.player.setDepth(3);
 
@@ -241,6 +249,82 @@ class Play extends Phaser.Scene {
       on: false,
       follow: this.player
     }); 
+
+
+    // Animations
+
+    // Player Animations
+    this.anims.create({
+      key: 'jump_idle',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 2},
+      ],
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'walk_left',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 0},
+        {frame: 1},
+      ],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'walk_right',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 3},
+        {frame: 4},
+      ],
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'turn_left',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 4},
+        {frame: 3},
+        {frame: 2},
+        {frame: 1},
+        {frame: 0},
+      ],
+    //  repeat: 1
+    });
+
+    this.anims.create({
+      key: 'turn_right',
+      defaultTextureKey: 'playerAnims',
+      frames: [
+        {frame: 0},
+        {frame: 1},
+        {frame: 2},
+        {frame: 3},
+        {frame: 4},
+      ],
+    //  repeat: 1
+    });
+
+    this.player.anims.play('jump_idle');
+
+    // Spring Animation
+    this.anims.create({
+      key: 'bounce',
+      defaultTextureKey: 'kenney_sheet3',
+      frames: [
+        {frame: 0},
+        {frame: 1},
+        {frame: 2},
+        {frame: 3},
+      ],
+      repeat: 1
+    });
 
     // Colliders:
     // Ground and wall colliders
@@ -289,8 +373,10 @@ class Play extends Phaser.Scene {
     this.spikeCollider.active = this.player.spikeEnable;
 
     // Spring Collider
-    this.springCollider = this.physics.add.collider(this.player, this.springGroup, () => {
+    this.springCollider = this.physics.add.collider(this.player, this.springGroup, (player, spring) => {
+      
       if (this.player.body.blocked.down && !this.player.body.blocked.right && !this.player.body.blocked.left) {
+        spring.anims.play('bounce');
         this.player.setVelocityY(this.launchSpeed);
       }
     });
@@ -370,6 +456,28 @@ class Play extends Phaser.Scene {
   //  console.log(this.player.body.angle);
 
     this.player.update();
+
+    // PLayer movement animations
+    if (keyLEFT.isDown) {
+      if (this.player.body.velocity.x > 0) {
+        this.player.play('turn_left', true);
+
+      }
+      this.player.play('walk_left', true);
+    
+    } else if (keyRIGHT.isDown) {
+    //  console.log(this.player.body.velocity);
+      if (this.player.body.velocity.x < 0) {
+        this.player.play('turn_right', true);
+
+      }
+      this.player.play('walk_right', true);
+    }
+
+    if (this.player.body.velocity.x == 0) {
+      this.player.play('jump_idle', true);
+    }
+
     this.enemy1.update();
   
     if (this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) {
