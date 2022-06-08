@@ -233,6 +233,18 @@ class Play extends Phaser.Scene {
         this.player.touchGroundWall = true;
       }
     });
+
+    // Enemy collisions
+    this.physics.add.collider(this.player, this.enemy1, () => {
+      if (this.activeRespawn == null) {
+        this.player.setPosition(playerSpawn.x, playerSpawn.y);
+
+      } else {
+        this.player.setPosition(this.activeRespawn.x, this.activeRespawn.y);
+      }
+    });
+
+    this.physics.add.collider(this.enemy1, wallLayer);
     
     this.physics.add.collider(this.enemy1, groundLayer, () => {
 
