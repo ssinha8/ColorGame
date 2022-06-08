@@ -12,24 +12,28 @@ class Play extends Phaser.Scene {
       frameHeight: 16
     });
     this.load.spritesheet("wall_sheet", "./assets/wallpowerup.png", {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 32,
+      frameHeight: 32
     });
     this.load.spritesheet("spring_sheet", "./assets/Springpowerup.png", {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 32,
+      frameHeight: 32
     });
     this.load.spritesheet("gravity_sheet", "./assets/Gravity.png", {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 32,
+      frameHeight: 32
     });
     this.load.spritesheet("enemy_sheet", "./assets/Enemypowerup.png", {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 32,
+      frameHeight: 32
     });
     this.load.spritesheet("mom_sheet", "./assets/MomentumPowerup.png", {
-      frameWidth: 64,
-      frameHeight: 64
+      frameWidth: 32,
+      frameHeight: 32
+    });
+    this.load.spritesheet("altars", "./assets/RespawnImgSet.png", {
+      frameWidth: 449,
+      frameHeight: 355
     });
     this.load.tilemapTiledJSON("platform_map", "./assets/map.json");    // Tiled JSON file
 
@@ -81,30 +85,60 @@ class Play extends Phaser.Scene {
 
     this.gravAltar = map.createFromObjects("GravAltar", {
       name: "gravAltar",
-      key: "gravity_sheet",
+      key: "altars",
       frame: 0
     });
 
     this.wallAltar = map.createFromObjects("WallAltar", {
       name: "wallAltar",
-      key: "wall_sheet",
+      key: "altars",
       frame: 0
     });
 
     this.enemyAltar = map.createFromObjects("EnemyAltar", {
       name: "enemyAltar",
-      key: "enemy_sheet",
+      key: "altars",
       frame: 0
     });
 
     this.momAltar = map.createFromObjects("MomAltar", {
       name: "momAltar",
-      key: "mom_sheet",
+      key: "altars",
       frame: 0
     });
 
     this.springAltar = map.createFromObjects("SpringAltar", {
       name: "springAltar",
+      key: "altars",
+      frame: 0
+    });
+
+    this.gravPowerup = map.createFromObjects("GravAltar", {
+      name: "gravPowerup",
+      key: "gravity_sheet",
+      frame: 0
+    });
+
+    this.wallPowerup = map.createFromObjects("WallAltar", {
+      name: "wallPowerup",
+      key: "wall_sheet",
+      frame: 0
+    });
+
+    this.enemyPowerup = map.createFromObjects("EnemyAltar", {
+      name: "enemyPowerup",
+      key: "enemy_sheet",
+      frame: 0
+    });
+
+    this.momentumPowerup = map.createFromObjects("MomAltar", {
+      name: "momPowerup",
+      key: "mom_sheet",
+      frame: 0
+    });
+
+    this.springPowerup = map.createFromObjects("SpringAltar", {
+      name: "springPowerup",
       key: "spring_sheet",
       frame: 0
     });

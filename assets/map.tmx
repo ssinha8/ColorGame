@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="81">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="360" height="170" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="94">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
@@ -31,37 +31,33 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="37" name="wallpowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="wallpowerup.png" width="64" height="64"/>
+ <tileset firstgid="37" name="RespawnImgSet" tilewidth="449" tileheight="355" tilecount="2" columns="2">
+  <image source="RespawnImgSet.png" width="898" height="355"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="1">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
- <tileset firstgid="38" name="Gravity" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <properties>
-   <property name="collides" type="bool" value="true"/>
-  </properties>
-  <image source="Gravity.png" width="64" height="64"/>
+ <tileset firstgid="39" name="Gravity" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="Gravity.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="39" name="Enemypowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <properties>
-   <property name="collides" type="bool" value="false"/>
-  </properties>
-  <image source="Enemypowerup.png" width="64" height="64"/>
+ <tileset firstgid="40" name="Springpowerup" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="Springpowerup.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="40" name="MomentumPowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <properties>
-   <property name="collides" type="bool" value="true"/>
-  </properties>
-  <image source="MomentumPowerup.png" width="64" height="64"/>
+ <tileset firstgid="41" name="MomentumPowerup" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="MomentumPowerup.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="41" name="Springpowerup" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <properties>
-   <property name="collides" type="bool" value="true"/>
-  </properties>
-  <image source="Springpowerup.png" width="64" height="64"/>
+ <tileset firstgid="42" name="wallpowerup" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="wallpowerup.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="43" name="Enemypowerup" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="Enemypowerup.png" width="32" height="32"/>
  </tileset>
  <layer id="1" name="Ground" width="360" height="170">
   <data encoding="csv">
@@ -415,19 +411,24 @@
   <object id="1" name="spike" gid="8" x="114.66" y="241.136" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="11" name="EnemyAltar">
-  <object id="78" name="enemyAltar" gid="39" x="5552.25" y="288.5" width="16" height="16"/>
+  <object id="92" name="enemyAltar" gid="37" x="5510.75" y="288.5" width="67.35" height="53.25"/>
+  <object id="93" name="enemyPowerup" gid="43" x="5528.25" y="267.25" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="WallAltar">
-  <object id="76" name="wallAltar" gid="37" x="271.818" y="256.273" width="16" height="16"/>
+  <object id="88" name="wallAltar" gid="37" x="247.517" y="256.125" width="67.35" height="53.25"/>
+  <object id="89" name="wallPowerup" gid="42" x="264.909" y="234.909" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="7" name="GravAltar">
-  <object id="77" name="gravAltar" gid="38" x="3136.25" y="1264.25" width="16" height="16"/>
+  <object id="82" name="gravAltar" gid="37" x="3126.21" y="1264.58" width="67.35" height="53.25"/>
+  <object id="83" name="gravPowerup" gid="39" x="3143.36" y="1243" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="9" name="MomAltar">
-  <object id="79" name="momAltar" gid="40" x="80.1875" y="2688.38" width="16" height="16"/>
+  <object id="86" name="momAltar" gid="37" x="53.7386" y="2688.16" width="67.35" height="53.25"/>
+  <object id="87" name="momPowerup" gid="41" x="71.3636" y="2666.73" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="10" name="SpringAltar">
-  <object id="80" name="springAltar" gid="41" x="5552.27" y="2688.3" width="16" height="16"/>
+  <object id="84" name="springAltar" gid="37" x="5525.89" y="2688.58" width="67.35" height="53.25"/>
+  <object id="85" name="springPowerup" gid="40" x="5543" y="2666.27" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="Spring">
   <object id="9" name="spring" gid="9" x="5407.83" y="2079.83" width="16" height="16"/>
